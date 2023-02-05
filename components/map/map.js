@@ -1,8 +1,8 @@
-import ReactMapGL from "react-map-gl";
+import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
 
-export default function Map(props) {
+export default function Map() {
   // const { vacancies } = props;
 
   const [viewport, setViewport] = useState({
@@ -17,9 +17,11 @@ export default function Map(props) {
       mapStyle={"mapbox://styles/mapbox/dark-v11"}
       mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       minZoom={5.5}
-      maxZoom={15}
+      maxZoom={14}
       {...viewport}
       onMove={(evt) => setViewport(evt.viewport)}
-    />
+    >
+      <NavigationControl showCompass={false} />
+    </ReactMapGL>
   );
 }
