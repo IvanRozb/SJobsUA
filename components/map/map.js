@@ -15,8 +15,6 @@ export default function Map() {
     width: "100%",
     height: "100%",
   });
-  const onMouseEnter = useCallback(() => setCursor("pointer"), []);
-  const onMouseLeave = useCallback(() => setCursor("auto"), []);
   const onViewportChangeHandler = useCallback((evt) => {
     setViewport(evt.viewport);
     setCursor(evt.originalEvent.type === "mouseup" ? "auto" : "grab");
@@ -44,9 +42,6 @@ export default function Map() {
         longitude={31.1656}
         offsetLeft={0}
         offsetTop={0}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        cursor={cursor}
       />
     </ReactMapGL>
   );
