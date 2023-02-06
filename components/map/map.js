@@ -17,7 +17,8 @@ export default function Map() {
   });
   const onViewportChangeHandler = useCallback((evt) => {
     setViewport(evt.viewport);
-    setCursor(evt.originalEvent.type === "mouseup" ? "auto" : "grab");
+    if (evt.originalEvent)
+      setCursor(evt.originalEvent.type === "mouseup" ? "auto" : "grab");
   }, []);
   return (
     <ReactMapGL
