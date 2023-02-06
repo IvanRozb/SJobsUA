@@ -1,11 +1,13 @@
 import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import MapMarker from "@/components/map/map-marker";
 
 export default function Map() {
   // const { vacancies } = props;
+
+  const [cursor, setCursor] = useState("auto");
 
   const [viewport, setViewport] = useState({
     latitude: 48.3794,
@@ -13,6 +15,9 @@ export default function Map() {
     width: "100%",
     height: "100%",
   });
+
+  const onMouseEnter = useCallback(() => setCursor("pointer"), []);
+  const onMouseLeave = useCallback(() => setCursor("auto"), []);
 
   return (
     <ReactMapGL
@@ -26,6 +31,7 @@ export default function Map() {
         [22.1, 44.14],
         [40.35, 52.38],
       ]}
+      cursor={cursor}
       {...viewport}
       onMove={(evt) => setViewport(evt.viewport)}
     >
@@ -35,6 +41,9 @@ export default function Map() {
         longitude={31.1656}
         offsetLeft={0}
         offsetTop={0}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        cursor={cursor}
       />
     </ReactMapGL>
   );
