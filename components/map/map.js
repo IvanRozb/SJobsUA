@@ -2,6 +2,8 @@ import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
 
+import MapMarker from "@/components/map/map-marker";
+
 export default function Map() {
   // const { vacancies } = props;
 
@@ -22,6 +24,12 @@ export default function Map() {
       onMove={(evt) => setViewport(evt.viewport)}
     >
       <NavigationControl showCompass={false} />
+      <MapMarker
+        latitude={48.3794}
+        longitude={31.1656}
+        offsetLeft={0}
+        offsetTop={0}
+      />
     </ReactMapGL>
   );
 }
