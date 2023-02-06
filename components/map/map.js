@@ -18,8 +18,14 @@ export default function Map() {
     <ReactMapGL
       mapStyle={"mapbox://styles/mapbox/dark-v11"}
       mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-      minZoom={5.5}
+      minZoom={6}
       maxZoom={14}
+      dragRotate={false}
+      touchRotate={false}
+      maxBounds={[
+        [22.1, 44.14],
+        [40.35, 52.38],
+      ]}
       {...viewport}
       onMove={(evt) => setViewport(evt.viewport)}
     >
