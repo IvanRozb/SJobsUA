@@ -15,10 +15,12 @@ export default function Map() {
     width: "100%",
     height: "100%",
   });
-
   const onMouseEnter = useCallback(() => setCursor("pointer"), []);
   const onMouseLeave = useCallback(() => setCursor("auto"), []);
-
+  const onViewportChangeHandler = useCallback((evt) => {
+    setViewport(evt.viewport);
+    setCursor(evt.originalEvent.type === "mouseup" ? "auto" : "grab");
+  }, []);
   return (
     <ReactMapGL
       mapStyle={"mapbox://styles/mapbox/dark-v11"}
@@ -33,7 +35,8 @@ export default function Map() {
       ]}
       cursor={cursor}
       {...viewport}
-      onMove={(evt) => setViewport(evt.viewport)}
+      onMove={onViewportChangeHandler}
+      onMouseMove={() => setCursor("auto")}
     >
       <NavigationControl showCompass={false} />
       <MapMarker
