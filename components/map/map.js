@@ -3,11 +3,13 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useCallback, useState } from "react";
 
 import MapMarker from "@/components/map/map-marker";
+import MapPopup from "@/components/map/map-popup";
 
 export default function Map() {
   // const { vacancies } = props;
 
   const [cursor, setCursor] = useState("auto");
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   const [viewport, setViewport] = useState({
     latitude: 48.3794,
@@ -20,6 +22,7 @@ export default function Map() {
     if (evt.originalEvent)
       setCursor(evt.originalEvent.type === "mouseup" ? "auto" : "grab");
   }, []);
+
   return (
     <ReactMapGL
       mapStyle={"mapbox://styles/mapbox/dark-v11"}
@@ -43,7 +46,16 @@ export default function Map() {
         longitude={31.1656}
         offsetLeft={0}
         offsetTop={0}
+        onClick={() => {
+          setSelectedMarker({ latitude: 48.3794, longitude: 31.1656 });
+        }}
       />
+      {selectedMarker && (
+        <MapPopup
+          selectedMarker={selectedMarker}
+          setSelectedMarker={setSelectedMarker}
+        />
+      )}
     </ReactMapGL>
   );
 }
