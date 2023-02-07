@@ -3,15 +3,18 @@ import { Popup } from "react-map-gl";
 
 import classes from "./map-popup.module.css";
 import Image from "next/image";
+import { useContext } from "react";
+import { Context } from "@/components/map/render-map";
 
 export default function MapPopup(props) {
-  const { selectedMarker, setSelectedMarker } = props;
+  const { selectedMarker } = props;
+  const { markers, setMarkers } = useContext(Context);
+
   const formattedDate = new Date("2020-10-10").toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
-  console.log(formattedDate);
 
   return (
     <Popup
@@ -19,9 +22,17 @@ export default function MapPopup(props) {
       longitude={selectedMarker.longitude}
       closeButton={true}
       closeOnClick={false}
-      onClose={() => setSelectedMarker(null)}
+      onClose={() => {
+        markers[selectedMarker.index].isActive = false;
+        setMarkers(markers);
+      }}
     >
-      <ClickAwayListener onClickAway={() => setSelectedMarker(null)}>
+      <ClickAwayListener
+        onClickAway={() => {
+          markers[selectedMarker.index].isActive = false;
+          setMarkers(markers);
+        }}
+      >
         <div className={classes.popup}>
           <div className={classes.image}>
             <Image
