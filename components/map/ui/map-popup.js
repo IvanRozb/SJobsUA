@@ -22,15 +22,11 @@ export default function MapPopup(props) {
       longitude={selectedMarker.longitude}
       closeButton={true}
       closeOnClick={false}
-      onClose={() => {
-        markers[selectedMarker.index].isActive = false;
-        setMarkers(markers);
-      }}
     >
       <ClickAwayListener
         onClickAway={() => {
           markers[selectedMarker.index].isActive = false;
-          setMarkers(markers);
+          setMarkers([...markers]);
         }}
       >
         <div className={classes.popup}>
