@@ -2,8 +2,8 @@ import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useCallback, useState } from "react";
 
-import MapMarker from "@/components/map/map-marker";
-import MapPopup from "@/components/map/map-popup";
+import MapMarker from "@/components/map/ui/map-marker";
+import MapPopup from "@/components/map/ui/map-popup";
 
 export default function Map() {
   // const { vacancies } = props;
