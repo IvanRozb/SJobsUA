@@ -3,6 +3,7 @@ import MapWrapper from "@/components/map/map-wrapper";
 import { Fragment } from "react";
 import Head from "next/head";
 import classes from "@/styles/Home.module.css";
+import { getAllVacancies } from "@/helper/api";
 
 export default function Home(props) {
   return (
@@ -18,22 +19,11 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  if (context.req.method === "GET") {
-    // fetch vacancies from the server
-    const data = [
-      { id: 0, latitude: 48, longitude: 30, isActive: false, index: 0 },
-      { id: 1, latitude: 47, longitude: 30, isActive: false, index: 1 },
-    ];
-
-    return {
-      props: {
-        vacancies: data,
-      },
-    };
-  }
-
+export async function getStaticProps() {
   return {
-    props: {},
+    props: {
+      vacancies: await getAllVacancies(),
+    },
+    revalidate: 3 * 24 * 60 * 60, // one time per 3 days
   };
 }
