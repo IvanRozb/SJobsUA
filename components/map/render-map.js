@@ -2,7 +2,7 @@ import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { createContext, useCallback, useState } from "react";
 
-import MarkerList from "@/components/map/ui/marker/marker-list";
+import MapSource from "@/components/map/map-source";
 
 export const Context = createContext(undefined);
 
@@ -43,8 +43,9 @@ export default function RenderMap(props) {
         onMove={onViewportChangeHandler}
         onMouseMove={() => setCursor("auto")}
       >
+        <MapSource vacancies={vacancies} />
         <NavigationControl showCompass={false} />
-        <MarkerList markers={markers} />
+        {/*<MarkerList markers={markers} />*/}
       </ReactMapGL>
     </Context.Provider>
   );
