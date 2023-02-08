@@ -1,0 +1,7 @@
+.map_marker_button{
+    height: 2rem;
+
+    background-color: transparent;
+
+    cursor: pointer !important;
+}
