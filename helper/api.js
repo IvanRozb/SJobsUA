@@ -1,35 +1,35 @@
-function removeDuplicateVacanciesById(vacancies) {
-  let uniqueIds = new Set();
-  let result = [];
-
-  for (let vacancy of vacancies) {
-    if (!uniqueIds.has(vacancy.id)) {
-      uniqueIds.add(vacancy.id);
-      result.push(vacancy);
-    }
-  }
-
-  return result;
-}
-
-function removeDuplicateVacanciesByCoordinates(vacancies, precision) {
-  let uniqueIds = new Set();
-  let result = [];
-
-  for (let vacancy of vacancies) {
-    let key = `${vacancy.latitude.toFixed(
-      precision
-    )}|||${vacancy.longitude.toFixed(precision)}`;
-    if (!uniqueIds.has(key)) {
-      uniqueIds.add(key);
-      result.push(vacancy);
-    }
-  }
-
-  return result;
-}
-
 export async function getAllVacancies(vacanciesOnPageAmount, limit) {
+  function removeDuplicateVacanciesById(vacancies) {
+    let uniqueIds = new Set();
+    let result = [];
+
+    for (let vacancy of vacancies) {
+      if (!uniqueIds.has(vacancy.id)) {
+        uniqueIds.add(vacancy.id);
+        result.push(vacancy);
+      }
+    }
+
+    return result;
+  }
+
+  function removeDuplicateVacanciesByCoordinates(vacancies, precision) {
+    let uniqueIds = new Set();
+    let result = [];
+
+    for (let vacancy of vacancies) {
+      let key = `${vacancy.latitude.toFixed(
+        precision
+      )}|||${vacancy.longitude.toFixed(precision)}`;
+      if (!uniqueIds.has(key)) {
+        uniqueIds.add(key);
+        result.push(vacancy);
+      }
+    }
+
+    return result;
+  }
+
   let total = Math.ceil((await getVacanciesAmount()) / vacanciesOnPageAmount);
   let vacancies = [];
   const fetchedVacancies = [];
