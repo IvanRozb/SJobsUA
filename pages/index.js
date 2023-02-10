@@ -22,8 +22,11 @@ export default function Home(props) {
 export async function getStaticProps() {
   return {
     props: {
-      vacancies: await getAllVacancies(59, 5),
+      vacancies: await getAllVacancies(
+        process.env.VACANCIES_ON_PAGE_AMOUNT,
+        process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME
+      ),
     },
-    revalidate: 3 * 24 * 60 * 60, // one time per 3 days
+    revalidate: process.env.FETCHING_VACANCIES_DAYS * 24 * 60 * 60, // one time per FETCHING_VACANCIES_DAYS days
   };
 }
