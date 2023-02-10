@@ -1,8 +1,37 @@
-export async function getAllVacancies() {
-  const vacanciesOnPageAmount = 59;
+function removeDuplicateVacanciesById(vacancies) {
+  let uniqueIds = new Set();
+  let result = [];
+
+  for (let vacancy of vacancies) {
+    if (!uniqueIds.has(vacancy.id)) {
+      uniqueIds.add(vacancy.id);
+      result.push(vacancy);
+    }
+  }
+
+  return result;
+}
+
+function removeDuplicateVacanciesByCoordinates(vacancies, precision) {
+  let uniqueIds = new Set();
+  let result = [];
+
+  for (let vacancy of vacancies) {
+    let key = `${vacancy.latitude.toFixed(
+      precision
+    )}|||${vacancy.longitude.toFixed(precision)}`;
+    if (!uniqueIds.has(key)) {
+      uniqueIds.add(key);
+      result.push(vacancy);
+    }
+  }
+
+  return result;
+}
+
+export async function getAllVacancies(vacanciesOnPageAmount, limit) {
   let total = Math.ceil((await getVacanciesAmount()) / vacanciesOnPageAmount);
   let vacancies = [];
-  let limit = 25;
   const fetchedVacancies = [];
 
   for (let i = 0; i < total && i < limit; i++) {
@@ -25,13 +54,13 @@ export async function getAllVacancies() {
       const { latitude, longitude, id } = vacancyData;
       vacancies.push({
         id,
-        index: vacancies.length,
         latitude,
         longitude,
-        isActive: false,
       });
     }
   });
+  vacancies = removeDuplicateVacanciesById(vacancies);
+  vacancies = removeDuplicateVacanciesByCoordinates(vacancies, 4);
   return vacancies;
 }
 

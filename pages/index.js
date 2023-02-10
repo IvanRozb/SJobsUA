@@ -22,7 +22,7 @@ export default function Home(props) {
 export async function getStaticProps() {
   return {
     props: {
-      vacancies: await getAllVacancies(),
+      vacancies: await getAllVacancies(59, 5),
     },
     revalidate: 3 * 24 * 60 * 60, // one time per 3 days
   };
