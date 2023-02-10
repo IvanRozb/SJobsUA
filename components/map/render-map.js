@@ -2,8 +2,7 @@ import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { createContext, useCallback, useRef, useState } from "react";
 import Supercluster from "supercluster";
-import MapCluster from "@/components/map/ui/map-cluster";
-import MapSingleMarker from "@/components/map/ui/map-single-marker";
+import MapClusterList from "@/components/map/collections/map-cluster-list";
 
 export const Context = createContext({
   mapRef: undefined,
@@ -105,34 +104,7 @@ export default function RenderMap(props) {
         }}
       >
         <NavigationControl showCompass={false} />
-        {clusters?.map((cluster) => {
-          const { coordinates } = cluster.geometry;
-          const [longitude, latitude] = coordinates;
-          const {
-            cluster: isCluster,
-            point_count: pointCount,
-            vacancyId,
-          } = cluster.properties;
-
-          if (!isCluster) {
-            return (
-              <MapSingleMarker
-                key={vacancyId}
-                marker={{ longitude, latitude }}
-              />
-            );
-          }
-
-          return (
-            <MapCluster
-              key={cluster.id}
-              id={cluster.id}
-              latitude={latitude}
-              longitude={longitude}
-              pointCount={pointCount}
-            />
-          );
-        })}
+        <MapClusterList clusters={clusters} />
       </ReactMapGL>
     </Context.Provider>
   );
