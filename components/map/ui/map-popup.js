@@ -1,32 +1,31 @@
-import ClickAwayListener from "react-click-away-listener";
 import { Popup } from "react-map-gl";
-
-import classes from "./map-popup.module.css";
+import ClickAwayListener from "react-click-away-listener";
 import Image from "next/image";
 import { useContext } from "react";
 import { Context } from "@/components/map/render-map";
+import classes from "./map-popup.module.css";
 
-export default function MapPopup(props) {
-  const { selectedMarker } = props;
-  const { markers, setMarkers } = useContext(Context);
+export default function MapPopup() {
+  const { selectedMarker, setSelectedMarker } = useContext(Context);
 
-  const formattedDate = new Date("2020-10-10").toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-
-  return (
+  return selectedMarker ? (
     <Popup
       latitude={selectedMarker.latitude}
       longitude={selectedMarker.longitude}
       closeButton={true}
       closeOnClick={false}
+      onClose={() => setSelectedMarker(null)}
     >
       <ClickAwayListener
-        onClickAway={() => {
-          markers[selectedMarker.index].isActive = false;
-          setMarkers([...markers]);
+        onClickAway={(event) => {
+          if (
+            !(
+              event.target.tagName === "path" ||
+              event.target.tagName === "svg" ||
+              event.target.classList.contains("mapboxgl-marker")
+            )
+          )
+            setSelectedMarker(null);
         }}
       >
         <div className={classes.popup}>
@@ -41,7 +40,6 @@ export default function MapPopup(props) {
           </div>
           <div className={classes.content}>
             <h3>{"title"}</h3>
-            <time>{formattedDate}</time>
             <br />
             <a
               href={
@@ -54,5 +52,5 @@ export default function MapPopup(props) {
         </div>
       </ClickAwayListener>
     </Popup>
-  );
+  ) : null;
 }
