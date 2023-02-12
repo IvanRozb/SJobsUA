@@ -54,7 +54,7 @@ export default function MapPopup(props) {
               alt={data.name}
               width={300}
               height={(300 * 2) / 3}
-              layout="responsive"
+              style={{ "object-fit": "contain" }}
             />
           </div>
           <div className={classes.content}>
