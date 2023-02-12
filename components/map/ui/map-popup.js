@@ -12,7 +12,7 @@ export default function MapPopup() {
     <Popup
       latitude={selectedMarker.latitude}
       longitude={selectedMarker.longitude}
-      closeButton={true}
+      closeButton={false}
       closeOnClick={false}
       onClose={() => setSelectedMarker(null)}
     >
@@ -39,15 +39,9 @@ export default function MapPopup() {
             />
           </div>
           <div className={classes.content}>
-            <h3>{"title"}</h3>
-            <br />
-            <a
-              href={
-                "https://jobs.dou.ua/companies/samsung/vacancies/172124/?from=list_hot"
-              }
-            >
-              dou.com.ua
-            </a>
+            <h3>{"profession"}</h3>
+            <p>{"salary"}</p>
+            <h3>{"company"}</h3>
           </div>
         </div>
       </ClickAwayListener>
