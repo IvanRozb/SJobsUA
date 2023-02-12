@@ -51,11 +51,28 @@ export async function getAllVacancies(vacanciesOnPageAmount, limit) {
     for (const vacancyData of pageVacancies) {
       if (!vacancyData) continue;
 
-      const { latitude, longitude, id } = vacancyData;
+      const {
+        latitude,
+        longitude,
+        id,
+        name,
+        logo,
+        salary,
+        salaryFrom,
+        salaryTo,
+        companyName,
+      } = vacancyData;
+
       vacancies.push({
         id,
         latitude,
         longitude,
+        name,
+        logo,
+        salary,
+        salaryFrom,
+        salaryTo,
+        companyName,
       });
     }
   });

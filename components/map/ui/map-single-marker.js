@@ -9,7 +9,7 @@ export default function MapSingleMarker(props) {
   return (
     <Fragment>
       <MapPin marker={marker} />
-      <MapPopup />
+      <MapPopup marker={marker} />
     </Fragment>
   );
 }
