@@ -5,16 +5,35 @@ import { useContext } from "react";
 import { Context } from "@/components/map/render-map";
 import classes from "./map-popup.module.css";
 
-export default function MapPopup() {
-  const { selectedMarker, setSelectedMarker } = useContext(Context);
+export default function MapPopup(props) {
+  const { selectedLocation, setSelectedLocation } = useContext(Context);
+  const { markerData: data, location } = props.marker;
+  const { longitude, latitude } = location;
+  const logo = `https://company-logo-frankfurt.rabota.ua/cdn-cgi/image/w=250/${data.logo}`;
+  const salary =
+    data.salary || data.salaryFrom
+      ? data.salaryTo
+        ? `$${data.salaryFrom} - $${data.salaryTo}`
+        : `$${data.salary || data.salaryFrom}`
+      : data.salaryTo
+      ? `$${data.salaryTo}`
+      : `$(none mentioned)`;
 
-  return selectedMarker ? (
+  const refactorString = (str, length) =>
+    str.length < length ? str : str.substring(0, length) + "...";
+
+  const refactoredName = refactorString(data.name, 16);
+  const refactoredCompanyName = refactorString(data.companyName, 15);
+
+  return selectedLocation &&
+    selectedLocation.longitude === longitude &&
+    selectedLocation.latitude === latitude ? (
     <Popup
-      latitude={selectedMarker.latitude}
-      longitude={selectedMarker.longitude}
+      latitude={latitude}
+      longitude={longitude}
       closeButton={false}
       closeOnClick={false}
-      onClose={() => setSelectedMarker(null)}
+      onClose={() => setSelectedLocation(null)}
     >
       <ClickAwayListener
         onClickAway={(event) => {
@@ -25,23 +44,23 @@ export default function MapPopup() {
               event.target.classList.contains("mapboxgl-marker")
             )
           )
-            setSelectedMarker(null);
+            setSelectedLocation(null);
         }}
       >
         <div className={classes.popup}>
           <div className={classes.image}>
             <Image
-              src={"/images/company_image.png"}
-              alt={"title"}
+              src={logo}
+              alt={data.name}
               width={300}
-              height={200}
-              layout="responsive"
+              height={(300 * 2) / 3}
+              style={{ "object-fit": "contain" }}
             />
           </div>
           <div className={classes.content}>
-            <h3>{"profession"}</h3>
-            <p>{"salary"}</p>
-            <h3>{"company"}</h3>
+            <h3>{refactoredName}</h3>
+            <p>{salary}</p>
+            <h3>{refactoredCompanyName}</h3>
           </div>
         </div>
       </ClickAwayListener>

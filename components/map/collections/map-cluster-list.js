@@ -11,11 +11,29 @@ export default function MapClusterList(props) {
       cluster: isCluster,
       point_count: pointCount,
       vacancyId,
+      name,
+      logo,
+      salary,
+      salaryFrom,
+      salaryTo,
+      companyName,
     } = cluster.properties;
+
+    const markerData = {
+      name,
+      logo,
+      salary,
+      salaryFrom,
+      salaryTo,
+      companyName,
+    };
 
     if (!isCluster) {
       return (
-        <MapSingleMarker key={vacancyId} marker={{ longitude, latitude }} />
+        <MapSingleMarker
+          key={vacancyId}
+          marker={{ location: { longitude, latitude }, markerData }}
+        />
       );
     }
 

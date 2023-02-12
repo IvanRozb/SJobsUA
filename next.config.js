@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "company-logo-frankfurt.rabota.ua",
+        port: "",
+      },
+    ],
+  },
   env: {
     REACT_APP_MAPBOX_ACCESS_TOKEN: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
     VACANCIES_ON_PAGE_AMOUNT: process.env.VACANCIES_ON_PAGE_AMOUNT,

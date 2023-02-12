@@ -8,8 +8,8 @@ export const Context = createContext({
   mapRef: undefined,
   points: [],
   supercluster: undefined,
-  selectedMarker: undefined,
-  setSelectedMarker: undefined,
+  selectedLocation: undefined,
+  setSelectedLocation: undefined,
 });
 
 export default function RenderMap(props) {
@@ -34,7 +34,7 @@ export default function RenderMap(props) {
     zoom: 6,
     ...center,
   });
-  const [selectedMarker, setSelectedMarker] = useState(undefined);
+  const [selectedLocation, setSelectedLocation] = useState(undefined);
 
   const getZoom = () => {
     return mapRef.current ? mapRef.current.getMap().getZoom() : 0;
@@ -81,8 +81,8 @@ export default function RenderMap(props) {
         mapRef,
         points,
         supercluster,
-        selectedMarker,
-        setSelectedMarker,
+        selectedLocation,
+        setSelectedLocation,
       }}
     >
       <ReactMapGL

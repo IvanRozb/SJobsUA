@@ -1,7 +1,6 @@
 .mapboxgl-popup{
     max-width: 100% !important;
 }
-
 .mapboxgl-popup-content{
     background-color: #e6deda;
     width: 200px;
@@ -9,3 +8,4 @@
     padding: 0 !important;
     border-radius: 200px !important;
 }
+

@@ -4,15 +4,16 @@ import { useContext } from "react";
 import { Context } from "@/components/map/render-map";
 
 export default function MapPin(props) {
-  const { longitude, latitude } = props.marker;
-  const { setSelectedMarker } = useContext(Context);
+  const { location } = props.marker;
+  const { longitude, latitude } = location;
+  const { setSelectedLocation } = useContext(Context);
 
   return (
     <Marker
       latitude={latitude}
       longitude={longitude}
       onClick={() => {
-        setSelectedMarker(props.marker);
+        setSelectedLocation({ longitude, latitude });
       }}
     >
       <svg
