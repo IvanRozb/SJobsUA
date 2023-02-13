@@ -42,12 +42,10 @@ export async function getAllVacancies(...keys) {
   let vacancies = [];
   const fetchedVacancies = [];
 
-  for (let i = 0; i < total && i < limit; i++) {
+  for (let i = 0; i <= total && i <= limit; i++) {
     fetchedVacancies.push(
       fetch(
-        `https://api.rabota.ua/vacancy/search?page=${
-          i + 1
-        }&count=${vacanciesOnPageAmount}&keyWords=${keys}`
+        `https://api.rabota.ua/vacancy/search?page=${i}&count=${vacanciesOnPageAmount}&keyWords=${keys}`
       ).then((res) => res.json())
     );
   }

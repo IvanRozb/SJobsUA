@@ -31,8 +31,8 @@ export default function RenderMap(props) {
   });
 
   const center = { latitude: 48.3794, longitude: 31.1656 };
-  const latitudeBoundaries = [22.1, 44.14];
   const longitudeBoundaries = [40.35, 52.38];
+  const latitudeBoundaries = [22.1, 44.14];
   const boundaries = [latitudeBoundaries, longitudeBoundaries];
 
   const [clusters, setClusters] = useState([]);
