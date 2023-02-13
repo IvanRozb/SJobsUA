@@ -10,6 +10,7 @@ export const IndexContext = createContext({
   setIconName: undefined,
   isLoading: undefined,
   setIsLoading: undefined,
+  setVacancies: undefined,
 });
 
 export default function Home(props) {
@@ -22,7 +23,7 @@ export default function Home(props) {
 
   return (
     <IndexContext.Provider
-      value={{ iconName, setIconName, isLoading, setIsLoading }}
+      value={{ iconName, setIconName, isLoading, setIsLoading, setVacancies }}
     >
       <Fragment>
         <Head>
@@ -30,7 +31,7 @@ export default function Home(props) {
         </Head>
         <div className={classes.app}>
           <MapWrapper vacancies={vacancies} />
-          <Sidebar setVacancies={setVacancies} />
+          <Sidebar />
         </div>
       </Fragment>
     </IndexContext.Provider>
