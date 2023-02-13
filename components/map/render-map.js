@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import Supercluster from "supercluster";
-import MapClusterList from "@/components/map/collections/map-cluster-list";
+import MapClusterList from "@/components/collections/map-cluster-list";
 import { IndexContext } from "@/pages";
 
 export const Context = createContext({
