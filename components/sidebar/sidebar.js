@@ -6,8 +6,8 @@ export default function Sidebar(props) {
 
   return (
     <div className={classes.sidebar}>
-      <FilterWrapper name={"CSharp"} setVacancies={setVacancies} />
       <FilterWrapper name={"default"} setVacancies={setVacancies} />
+      <FilterWrapper name={"CSharp"} setVacancies={setVacancies} />
       <FilterWrapper name={"JS"} setVacancies={setVacancies} />
     </div>
   );
