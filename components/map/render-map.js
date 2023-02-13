@@ -1,8 +1,16 @@
 import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { createContext, useCallback, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Supercluster from "supercluster";
 import MapClusterList from "@/components/map/collections/map-cluster-list";
+import { IndexContext } from "@/pages";
 
 export const Context = createContext({
   mapRef: undefined,
@@ -13,20 +21,21 @@ export const Context = createContext({
 });
 
 export default function RenderMap(props) {
+  const { vacancies } = props;
   const mapRef = useRef();
+  const { iconName } = useContext(IndexContext);
 
   const supercluster = new Supercluster({
     radius: 32,
     maxZoom: 12,
   });
-  const [clusters, setClusters] = useState([]);
 
-  const { vacancies } = props;
   const center = { latitude: 48.3794, longitude: 31.1656 };
   const latitudeBoundaries = [22.1, 44.14];
   const longitudeBoundaries = [40.35, 52.38];
   const boundaries = [latitudeBoundaries, longitudeBoundaries];
 
+  const [clusters, setClusters] = useState([]);
   const [cursor, setCursor] = useState("auto");
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -47,33 +56,43 @@ export default function RenderMap(props) {
       : 0;
     return [curBound[0][0], curBound[0][1], curBound[1][0], curBound[1][1]];
   };
-  const getClusters = () => {
+  const getClusters = (points) => {
     if (!mapRef.current) return [];
 
     try {
       supercluster.load(points);
       return supercluster.getClusters(getBounds(), getZoom());
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
-  const points = vacancies.map((vacancy) => ({
-    type: "Feature",
-    properties: { cluster: false, vacancyId: vacancy.id, ...vacancy },
-    geometry: {
-      type: "Point",
-      coordinates: [vacancy.longitude, vacancy.latitude],
+  const getPoints = (vacancies) =>
+    vacancies.map((vacancy) => ({
+      type: "Feature",
+      properties: { cluster: false, vacancyId: vacancy.id, ...vacancy },
+      geometry: {
+        type: "Point",
+        coordinates: [vacancy.longitude, vacancy.latitude],
+      },
+    }));
+  const [points, setPoints] = useState(getPoints(vacancies));
+
+  useEffect(() => {
+    const points = getPoints(vacancies);
+    setPoints(points);
+    supercluster.load(points);
+    setClusters(getClusters(points));
+  }, [vacancies]);
+
+  const onViewportChangeHandler = useCallback(
+    (evt) => {
+      setClusters(getClusters(points));
+
+      setViewport({ ...evt.viewport });
+      if (evt.originalEvent)
+        setCursor(evt.originalEvent.type === "mouseup" ? "auto" : "grab");
     },
-  }));
-
-  const onViewportChangeHandler = useCallback((evt) => {
-    setClusters(getClusters());
-
-    setViewport({ ...evt.viewport });
-    if (evt.originalEvent)
-      setCursor(evt.originalEvent.type === "mouseup" ? "auto" : "grab");
-  }, []);
+    [points]
+  );
 
   return (
     <Context.Provider
@@ -100,11 +119,11 @@ export default function RenderMap(props) {
         ref={mapRef}
         onLoad={() => {
           supercluster.load(points);
-          setClusters(getClusters());
+          setClusters(getClusters(points));
         }}
       >
         <NavigationControl showCompass={false} />
-        <MapClusterList clusters={clusters} />
+        <MapClusterList clusters={clusters} icon={iconName} />
       </ReactMapGL>
     </Context.Provider>
   );

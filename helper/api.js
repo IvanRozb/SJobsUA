@@ -1,4 +1,4 @@
-export async function getAllVacancies(vacanciesOnPageAmount, limit) {
+export async function getAllVacancies(...keys) {
   function removeDuplicateVacanciesById(vacancies) {
     let uniqueIds = new Set();
     let result = [];
@@ -30,7 +30,17 @@ export async function getAllVacancies(vacanciesOnPageAmount, limit) {
     return result;
   }
 
+  keys = keys.length === 0 ? "" : keys;
+  keys = keys.toString();
+  console.log(keys);
+  keys = keys.replace("CSharp", "C%23");
+  keys = keys.replace("default", "");
+  console.log(keys);
+
+  const vacanciesOnPageAmount = process.env.VACANCIES_ON_PAGE_AMOUNT;
+  const limit = process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME;
   let total = Math.ceil((await getVacanciesAmount()) / vacanciesOnPageAmount);
+
   let vacancies = [];
   const fetchedVacancies = [];
 
@@ -39,7 +49,7 @@ export async function getAllVacancies(vacanciesOnPageAmount, limit) {
       fetch(
         `https://api.rabota.ua/vacancy/search?page=${
           i + 1
-        }&count=${vacanciesOnPageAmount}`
+        }&count=${vacanciesOnPageAmount}&keyWords=${keys}`
       ).then((res) => res.json())
     );
   }
@@ -78,6 +88,9 @@ export async function getAllVacancies(vacanciesOnPageAmount, limit) {
   });
   vacancies = removeDuplicateVacanciesById(vacancies);
   vacancies = removeDuplicateVacanciesByCoordinates(vacancies, 4);
+  for (let i = 0; i < 10; i++) {
+    console.log(vacancies[i]);
+  }
   return vacancies;
 }
 
