@@ -4,11 +4,11 @@ import { Fragment } from "react";
 
 // Wrapper for marker pin and popup
 export default function MapSingleMarker(props) {
-  const { marker } = props;
+  const { marker, icon } = props;
 
   return (
     <Fragment>
-      <MapPin marker={marker} />
+      <MapPin marker={marker} icon={icon} />
       <MapPopup marker={marker} />
     </Fragment>
   );

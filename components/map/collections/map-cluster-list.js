@@ -2,7 +2,7 @@ import MapSingleMarker from "@/components/map/ui/map-single-marker";
 import MapCluster from "@/components/map/ui/map-cluster";
 
 export default function MapClusterList(props) {
-  const { clusters } = props;
+  const { clusters, icon } = props;
 
   return clusters?.map((cluster) => {
     const { coordinates } = cluster.geometry;
@@ -33,6 +33,7 @@ export default function MapClusterList(props) {
         <MapSingleMarker
           key={vacancyId}
           marker={{ location: { longitude, latitude }, markerData }}
+          icon={icon}
         />
       );
     }
