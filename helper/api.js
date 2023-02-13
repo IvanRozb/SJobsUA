@@ -32,10 +32,8 @@ export async function getAllVacancies(...keys) {
 
   keys = keys.length === 0 ? "" : keys;
   keys = keys.toString();
-  console.log(keys);
   keys = keys.replace("CSharp", "C%23");
   keys = keys.replace("default", "");
-  console.log(keys);
 
   const vacanciesOnPageAmount = process.env.VACANCIES_ON_PAGE_AMOUNT;
   const limit = process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME;
@@ -88,9 +86,6 @@ export async function getAllVacancies(...keys) {
   });
   vacancies = removeDuplicateVacanciesById(vacancies);
   vacancies = removeDuplicateVacanciesByCoordinates(vacancies, 4);
-  for (let i = 0; i < 10; i++) {
-    console.log(vacancies[i]);
-  }
   return vacancies;
 }
 
