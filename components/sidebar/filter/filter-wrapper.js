@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { IndexContext } from "@/pages";
 
 export default function FilterWrapper(props) {
-  const { name, setVacancies } = props;
-  const { setIconName, setIsLoading } = useContext(IndexContext);
+  const { name } = props;
+  const { setIconName, setIsLoading, setVacancies } = useContext(IndexContext);
   const path = `/images/filters/${name}.svg`;
 
   return (
@@ -13,9 +13,14 @@ export default function FilterWrapper(props) {
       className={classes.filter}
       onClick={async () => {
         setIsLoading(true);
-        const vacancies = await fetch(`/api/filters/language-filter/${name}`)
-          .then((res) => res.json())
-          .then((data) => data.vacancies);
+        let vacancies;
+        try {
+          vacancies = await fetch(`/api/filters/language-filter/${name}`)
+            .then((res) => res.json())
+            .then((data) => data.vacancies);
+        } catch (error) {
+          console.log(error);
+        }
 
         setVacancies([...vacancies]);
         setIconName(name);
