@@ -14,6 +14,7 @@ export default function Sidebar() {
           "java",
           "pm",
           "CSharp",
+          ".NET",
         ]}
       />
     </div>

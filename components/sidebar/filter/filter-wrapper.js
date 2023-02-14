@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { IndexContext } from "@/pages";
 
 export default function FilterWrapper(props) {
-  const { name } = props;
+  let { name } = props;
+  name = name.replace(".", "");
   const { setIconName, setIsLoading, setVacancies } = useContext(IndexContext);
   let { currentFilter } = useContext(IndexContext);
   const path = `/images/filters/${name}.svg`;
