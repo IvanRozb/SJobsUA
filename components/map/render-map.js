@@ -1,4 +1,4 @@
-import ReactMapGL, { Layer, NavigationControl, Source } from "react-map-gl";
+import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {
   createContext,
@@ -11,6 +11,7 @@ import {
 import Supercluster from "supercluster";
 import MapClusterList from "@/components/collections/map-cluster-list";
 import { IndexContext } from "@/pages";
+import MapBorder from "@/components/map/borderline/map-border";
 
 export const Context = createContext({
   mapRef: undefined,
@@ -135,23 +136,7 @@ export default function RenderMap(props) {
       >
         <NavigationControl showCompass={false} />
         <MapClusterList clusters={clusters} icon={iconName} />
-        {countryBorder && (
-          <Source id={"country-border"} type={"geojson"} data={countryBorder}>
-            <Layer
-              id={"country-border-layer"}
-              type={"line"}
-              source={"country-border"}
-              layout={{
-                "line-join": "round",
-                "line-cap": "round",
-              }}
-              paint={{
-                "line-color": "#8d8d8d",
-                "line-width": 2,
-              }}
-            />
-          </Source>
-        )}
+        {countryBorder && <MapBorder countryBorder={countryBorder} />}
       </ReactMapGL>
     </Context.Provider>
   );
