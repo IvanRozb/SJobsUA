@@ -1,9 +1,21 @@
 import classes from "./sidebar.module.css";
+import FilterList from "@/components/collections/filter-list";
 
 export default function Sidebar() {
   return (
     <div className={classes.sidebar}>
-      <button>Get All Vacancies</button>
+      <FilterList
+        filters={[
+          "default",
+          "JS",
+          "php",
+          "ruby",
+          "python",
+          "java",
+          "pm",
+          "CSharp",
+        ]}
+      />
     </div>
   );
 }
