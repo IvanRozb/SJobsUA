@@ -38,8 +38,8 @@ export default function Home(props) {
           <title>SJobsUA</title>
         </Head>
         <div className={classes.app}>
-          <MapWrapper vacancies={vacancies} />
           <Sidebar />
+          <MapWrapper vacancies={vacancies} />
         </div>
       </Fragment>
     </IndexContext.Provider>
