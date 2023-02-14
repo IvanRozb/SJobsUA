@@ -4,7 +4,9 @@ import FilterList from "@/components/collections/filter-list";
 export default function Sidebar() {
   return (
     <div className={classes.sidebar}>
-      <FilterList filters={["default", "JS", "php", "ruby", "CSharp"]} />
+      <FilterList
+        filters={["default", "JS", "php", "ruby", "CSharp", "python"]}
+      />
     </div>
   );
 }
