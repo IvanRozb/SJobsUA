@@ -5,7 +5,16 @@ export default function Sidebar() {
   return (
     <div className={classes.sidebar}>
       <FilterList
-        filters={["default", "JS", "php", "ruby", "CSharp", "python", "java"]}
+        filters={[
+          "default",
+          "JS",
+          "php",
+          "ruby",
+          "CSharp",
+          "python",
+          "java",
+          "pm",
+        ]}
       />
     </div>
   );

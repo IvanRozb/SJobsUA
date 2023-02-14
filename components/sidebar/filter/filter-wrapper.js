@@ -30,6 +30,7 @@ export default function FilterWrapper(props) {
       <div className={classes.filter_image}>
         <Image width={50} height={50} src={path} alt={name} />
       </div>
+      <p>{name}</p>
     </button>
   );
 }
