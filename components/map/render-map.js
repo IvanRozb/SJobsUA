@@ -1,4 +1,4 @@
-import ReactMapGL, { NavigationControl } from "react-map-gl";
+import ReactMapGL, { Layer, NavigationControl, Source } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import {
   createContext,
@@ -44,6 +44,7 @@ export default function RenderMap(props) {
     ...center,
   });
   const [selectedLocation, setSelectedLocation] = useState(undefined);
+  const [countryBorder, setCountryBorder] = useState(undefined);
 
   const getZoom = () => {
     return mapRef.current ? mapRef.current.getMap().getZoom() : 0;
@@ -56,7 +57,7 @@ export default function RenderMap(props) {
       : 0;
     return [curBound[0][0], curBound[0][1], curBound[1][0], curBound[1][1]];
   };
-  const getClusters = (points) => {
+  const calculateClusters = (points) => {
     if (!mapRef.current) return [];
 
     try {
@@ -77,15 +78,25 @@ export default function RenderMap(props) {
   const [points, setPoints] = useState(getPoints(vacancies));
 
   useEffect(() => {
+    // set points
     const points = getPoints(vacancies);
     setPoints(points);
     supercluster.load(points);
-    setClusters(getClusters(points));
+    setClusters(calculateClusters(points));
   }, [vacancies]);
+
+  useEffect(() => {
+    // setCountryBorders
+    fetch(
+      "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/729d59ed25f7bcc7664fc6ca58755b4e8567e80c/releaseData/gbOpen/UKR/ADM0/geoBoundaries-UKR-ADM0_simplified.geojson"
+    )
+      .then((res) => res.json())
+      .then((data) => setCountryBorder(data));
+  }, []);
 
   const onViewportChangeHandler = useCallback(
     (evt) => {
-      setClusters(getClusters(points));
+      setClusters(calculateClusters(points));
 
       setViewport({ ...evt.viewport });
       if (evt.originalEvent)
@@ -119,11 +130,28 @@ export default function RenderMap(props) {
         ref={mapRef}
         onLoad={() => {
           supercluster.load(points);
-          setClusters(getClusters(points));
+          setClusters(calculateClusters(points));
         }}
       >
         <NavigationControl showCompass={false} />
         <MapClusterList clusters={clusters} icon={iconName} />
+        {countryBorder && (
+          <Source id={"country-border"} type={"geojson"} data={countryBorder}>
+            <Layer
+              id={"country-border-layer"}
+              type={"line"}
+              source={"country-border"}
+              layout={{
+                "line-join": "round",
+                "line-cap": "round",
+              }}
+              paint={{
+                "line-color": "#8d8d8d",
+                "line-width": 2,
+              }}
+            />
+          </Source>
+        )}
       </ReactMapGL>
     </Context.Provider>
   );
