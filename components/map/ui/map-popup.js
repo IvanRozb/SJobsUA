@@ -22,8 +22,8 @@ export default function MapPopup(props) {
   const refactorString = (str, length) =>
     str.length < length ? str : str.substring(0, length) + "...";
 
-  const refactoredName = refactorString(data.name, 16);
-  const refactoredCompanyName = refactorString(data.companyName, 15);
+  const refactoredName = refactorString(data.name, 13);
+  const refactoredCompanyName = refactorString(data.companyName, 13);
 
   return selectedLocation &&
     selectedLocation.longitude === longitude &&
@@ -54,7 +54,7 @@ export default function MapPopup(props) {
               alt={data.name}
               width={300}
               height={(300 * 2) / 3}
-              style={{ "object-fit": "contain" }}
+              style={{ objectFit: "contain" }}
             />
           </div>
           <div className={classes.content}>

@@ -1,0 +1,14 @@
+.filter{
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.filter_image{
+    width: 50px;
+    height: 50px;
+}
+
+.filter_image img{
+    width: 100%;
+    height: 100%;
+}
