@@ -37,8 +37,9 @@ export async function getAllVacancies(...keys) {
 
   const vacanciesOnPageAmount = process.env.VACANCIES_ON_PAGE_AMOUNT;
   const limit = process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME;
-  let total = Math.ceil((await getVacanciesAmount()) / vacanciesOnPageAmount);
-
+  let total = Math.ceil(
+    (await getAllVacanciesForSpecificKeyword(keys)) / vacanciesOnPageAmount
+  );
   let vacancies = [];
   const fetchedVacancies = [];
 
@@ -87,8 +88,10 @@ export async function getAllVacancies(...keys) {
   return vacancies;
 }
 
-export async function getVacanciesAmount() {
-  return await fetch("https://api.rabota.ua/vacancy/count").then((res) =>
-    res.json()
-  );
+export async function getAllVacanciesForSpecificKeyword(key) {
+  return (
+    await fetch(`https://api.rabota.ua/vacancy/search?keyWords=${key}`).then(
+      (res) => res.json()
+    )
+  ).total;
 }
