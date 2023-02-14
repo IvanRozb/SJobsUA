@@ -22,7 +22,7 @@ export default function FilterWrapper(props) {
             .then((res) => res.json())
             .then((data) => data.vacancies);
         } catch (error) {
-          console.log(error);
+          throw new Error(error);
         }
 
         setVacancies(vacancies);
