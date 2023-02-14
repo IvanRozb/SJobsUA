@@ -11,6 +11,7 @@ export const IndexContext = createContext({
   isLoading: undefined,
   setIsLoading: undefined,
   setVacancies: undefined,
+  currentFilter: "",
 });
 
 export default function Home(props) {
@@ -23,7 +24,14 @@ export default function Home(props) {
 
   return (
     <IndexContext.Provider
-      value={{ iconName, setIconName, isLoading, setIsLoading, setVacancies }}
+      value={{
+        iconName,
+        setIconName,
+        isLoading,
+        setIsLoading,
+        setVacancies,
+        currentFilter: iconName,
+      }}
     >
       <Fragment>
         <Head>
