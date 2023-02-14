@@ -146,7 +146,7 @@ export default function RenderMap(props) {
                 "line-cap": "round",
               }}
               paint={{
-                "line-color": "white",
+                "line-color": "#8d8d8d",
                 "line-width": 2,
               }}
             />
