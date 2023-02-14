@@ -10,10 +10,10 @@ export default function Sidebar() {
           "JS",
           "php",
           "ruby",
-          "CSharp",
           "python",
           "java",
           "pm",
+          "CSharp",
         ]}
       />
     </div>

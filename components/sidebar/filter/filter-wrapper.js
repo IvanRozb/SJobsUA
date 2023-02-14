@@ -6,12 +6,15 @@ import { IndexContext } from "@/pages";
 export default function FilterWrapper(props) {
   const { name } = props;
   const { setIconName, setIsLoading, setVacancies } = useContext(IndexContext);
+  let { currentFilter } = useContext(IndexContext);
   const path = `/images/filters/${name}.svg`;
 
   return (
     <button
       className={classes.filter}
       onClick={async () => {
+        if (currentFilter === name) return;
+
         setIsLoading(true);
         let vacancies;
         try {
@@ -22,9 +25,10 @@ export default function FilterWrapper(props) {
           console.log(error);
         }
 
-        setVacancies([...vacancies]);
+        setVacancies(vacancies);
         setIconName(name);
         setIsLoading(false);
+        currentFilter = name;
       }}
     >
       <div className={classes.filter_image}>
