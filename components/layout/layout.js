@@ -6,7 +6,6 @@ export default function Layout(props) {
     <div className={classes.layout}>
       <Sidebar />
       {props.children}
-      {/*<MapWrapper vacancies={props.children} />*/}
     </div>
   );
 }
