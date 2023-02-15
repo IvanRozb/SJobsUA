@@ -8,7 +8,7 @@ export default function FilterWrapper(props) {
   let { name } = props;
   name = name.replace(".", "");
   // const { setIconName, setVacancies } = useContext(IndexContext);
-  // let { currentFilter } = useContext(IndexContext);
+  let { currentFilter } = useContext(IndexContext);
   const path = `/images/filters/${name}.svg`;
 
   return (
