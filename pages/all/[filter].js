@@ -1,17 +1,21 @@
-import { getAllVacancies } from "@/helper/api";
 import MapWrapper from "@/components/map/map-wrapper";
 
 export default function FilterPage(props) {
-  const { vacancies } = props;
+  const { vacancies, filter } = props;
 
-  return <MapWrapper vacancies={vacancies} />;
+  return <MapWrapper vacancies={vacancies} filterName={filter} />;
 }
 
 export async function getStaticProps(context) {
-  // console.log(124444444444444444444, context.params.filter);
+  const { filter } = context.params;
+  const { vacancies } = await fetch(
+    `http://localhost:3000/api/filters/language-filter/${filter}`
+  ).then((res) => res.json());
+
   return {
     props: {
-      vacancies: await getAllVacancies(context.params.filter),
+      vacancies,
+      filter,
     },
     revalidate: process.env.FETCHING_VACANCIES_DAYS * 24 * 60 * 60, // one time per FETCHING_VACANCIES_DAYS days
   };
