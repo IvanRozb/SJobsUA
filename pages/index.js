@@ -1,6 +1,5 @@
-import Sidebar from "@/components/sidebar/sidebar";
 import MapWrapper from "@/components/map/map-wrapper";
-import { createContext, Fragment, useEffect, useState } from "react";
+import { createContext, Fragment, useState } from "react";
 import Head from "next/head";
 import classes from "@/styles/Home.module.css";
 import { getAllVacancies } from "@/helper/api";
@@ -8,8 +7,6 @@ import { getAllVacancies } from "@/helper/api";
 export const IndexContext = createContext({
   iconName: "",
   setIconName: undefined,
-  isLoading: undefined,
-  setIsLoading: undefined,
   setVacancies: undefined,
   currentFilter: "",
 });
@@ -17,18 +14,12 @@ export const IndexContext = createContext({
 export default function Home(props) {
   const [vacancies, setVacancies] = useState(props.vacancies);
   const [iconName, setIconName] = useState("default");
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
 
   return (
     <IndexContext.Provider
       value={{
         iconName,
         setIconName,
-        isLoading,
-        setIsLoading,
         setVacancies,
         currentFilter: iconName,
       }}
@@ -38,7 +29,6 @@ export default function Home(props) {
           <title>SJobsUA</title>
         </Head>
         <div className={classes.app}>
-          <Sidebar />
           <MapWrapper vacancies={vacancies} />
         </div>
       </Fragment>
