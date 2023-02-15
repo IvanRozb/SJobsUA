@@ -68,7 +68,7 @@ export default function RenderMap(props) {
   };
 
   const getPoints = (vacancies) =>
-    vacancies.map((vacancy) => ({
+    vacancies?.map((vacancy) => ({
       type: "Feature",
       properties: { cluster: false, vacancyId: vacancy.id, ...vacancy },
       geometry: {
@@ -80,7 +80,7 @@ export default function RenderMap(props) {
 
   useEffect(() => {
     // set points
-    const points = getPoints(vacancies);
+    const points = getPoints(vacancies) ?? [];
     setPoints(points);
     supercluster.load(points);
     setClusters(calculateClusters(points));
