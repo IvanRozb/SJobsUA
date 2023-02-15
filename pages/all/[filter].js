@@ -9,7 +9,7 @@ export default function FilterPage(props) {
 export async function getStaticProps(context) {
   const { filter } = context.params;
   const { vacancies } = await fetch(
-    `http://localhost:3000/api/filters/language-filter/${filter}`
+    `${process.env.DEFAULT_PORT}/api/filters/language-filter/${filter}`
   ).then((res) => res.json());
 
   return {
