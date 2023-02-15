@@ -16,6 +16,7 @@ const nextConfig = {
     LIMIT_FETCHING_REQUEST_IN_ONE_TIME:
       process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME,
     FETCHING_VACANCIES_DAYS: process.env.FETCHING_VACANCIES_DAYS,
+    DEFAULT_PORT: process.env.DEFAULT_PORT,
   },
 };
 
