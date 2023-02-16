@@ -17,7 +17,7 @@ export default function MapCluster(props) {
             setShowVacancies((show) => !show);
           }}
         >
-          <div>
+          <div className={"point"}>
             <Image
               src={`/images/filters/${icon}.svg`}
               alt={icon}
