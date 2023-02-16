@@ -1,45 +1,43 @@
 import { Marker } from "react-map-gl";
 import classes from "@/components/map/ui/map-cluster.module.css";
-import { useCallback, useContext } from "react";
-import { Context } from "@/components/map/render-map";
+import Image from "next/image";
+import { Fragment, useState } from "react";
+import MapPopup from "@/components/map/ui/map-popup";
 
 export default function MapCluster(props) {
-  const { id, longitude, latitude, pointCount } = props;
-
-  const { mapRef, points, supercluster } = useContext(Context);
-
-  const onSelectVacancy = useCallback(({ longitude, latitude, zoom }) => {
-    mapRef.current?.easeTo({
-      center: [longitude, latitude],
-      duration: 2000,
-      zoom: zoom,
-    });
-  }, []);
+  const { longitude, latitude, points, pointCount, icon } = props;
+  const [showVacancies, setShowVacancies] = useState(false);
 
   return (
-    <Marker latitude={latitude} longitude={longitude}>
-      <div
-        className={classes.cluster_marker}
-        style={{
-          width: `${10 + (pointCount / points.length) * 20}px`,
-          height: `${10 + (pointCount / points.length) * 20}px`,
-        }}
-        onClick={() => {
-          supercluster.load(points);
-          const expansionZoom = Math.min(
-            supercluster.getClusterExpansionZoom(id),
-            20
-          );
-
-          onSelectVacancy({
-            longitude,
-            latitude,
-            zoom: expansionZoom + 2.2,
-          });
-        }}
-      >
-        {pointCount}
-      </div>
-    </Marker>
+    <Fragment>
+      <Marker latitude={latitude} longitude={longitude}>
+        <div
+          className={classes.cluster_marker}
+          onClick={() => {
+            setShowVacancies((show) => !show);
+          }}
+        >
+          <div>
+            <Image
+              src={`/images/filters/${icon}.svg`}
+              alt={icon}
+              width={50}
+              height={50}
+            />
+          </div>
+          {pointCount > 1 ? (
+            <div className={classes.cluster_count}>
+              <p>{pointCount}</p>
+            </div>
+          ) : null}
+        </div>
+      </Marker>
+      {showVacancies && (
+        <MapPopup
+          markers={{ vacancies: points, location: { latitude, longitude } }}
+          setShowVacancies={setShowVacancies}
+        />
+      )}
+    </Fragment>
   );
 }

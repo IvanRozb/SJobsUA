@@ -17,8 +17,8 @@ export default function RenderMap(props) {
   const { vacancies, filterName } = props;
   const mapRef = useRef();
   const supercluster = new Supercluster({
-    radius: 32,
-    maxZoom: 12,
+    radius: 40,
+    maxZoom: 20,
   });
 
   const center = { latitude: 48.3794, longitude: 31.1656 };
@@ -53,8 +53,36 @@ export default function RenderMap(props) {
 
     try {
       supercluster.load(points);
-      return supercluster.getClusters(getBounds(), getZoom());
-    } catch (error) {}
+      const clusters = supercluster.getClusters(getBounds(), getZoom());
+      return clusters.map((cluster) => {
+        const properties = {
+          ...cluster.properties,
+          cluster: cluster.properties.cluster_id !== undefined,
+        };
+        const coordinates = cluster.geometry.coordinates;
+        if (cluster.properties.cluster_id !== undefined) {
+          const leaves = supercluster.getLeaves(
+            cluster.properties.cluster_id,
+            Infinity
+          );
+          const points = leaves.map((leaf) => leaf.properties);
+          return {
+            type: "Feature",
+            geometry: { type: "Point", coordinates },
+            properties,
+            points,
+          };
+        }
+        return {
+          type: "Feature",
+          geometry: { type: "Point", coordinates },
+          properties,
+          points: [{ ...cluster.properties, coordinates }],
+        };
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   const getPoints = (vacancies) => {

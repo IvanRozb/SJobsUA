@@ -54,10 +54,7 @@ export async function getAllVacancies(...keys) {
     }
   }
 
-  return removeDuplicateVacanciesByCoordinates(
-    removeDuplicateVacanciesById(vacancies),
-    4
-  );
+  return removeDuplicateVacanciesById(vacancies);
 }
 
 async function getTotalVacanciesForKeywords(keywords) {
@@ -75,21 +72,4 @@ function removeDuplicateVacanciesById(vacancies) {
   return Array.from(new Set(vacancies.map((vacancy) => vacancy.id))).map((id) =>
     vacancies.find((vacancy) => vacancy.id === id)
   );
-}
-
-function removeDuplicateVacanciesByCoordinates(vacancies, precision) {
-  let uniqueIds = new Set();
-  let result = [];
-
-  for (let vacancy of vacancies) {
-    let key = `${vacancy.latitude.toFixed(
-      precision
-    )}|||${vacancy.longitude.toFixed(precision)}`;
-    if (!uniqueIds.has(key)) {
-      uniqueIds.add(key);
-      result.push(vacancy);
-    }
-  }
-
-  return result;
 }
