@@ -1,16 +1,8 @@
 import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import Supercluster from "supercluster";
 import MapClusterList from "@/components/collections/map-cluster-list";
-import { IndexContext } from "@/pages";
 import MapBorder from "@/components/map/borderline/map-border";
 
 export const Context = createContext({
@@ -22,10 +14,8 @@ export const Context = createContext({
 });
 
 export default function RenderMap(props) {
-  const { vacancies } = props;
+  const { vacancies, filterName } = props;
   const mapRef = useRef();
-  const { iconName } = useContext(IndexContext);
-
   const supercluster = new Supercluster({
     radius: 32,
     maxZoom: 12,
@@ -67,8 +57,9 @@ export default function RenderMap(props) {
     } catch (error) {}
   };
 
-  const getPoints = (vacancies) =>
-    vacancies.map((vacancy) => ({
+  const getPoints = (vacancies) => {
+    if (!vacancies) return [];
+    return vacancies.map((vacancy) => ({
       type: "Feature",
       properties: { cluster: false, vacancyId: vacancy.id, ...vacancy },
       geometry: {
@@ -76,11 +67,12 @@ export default function RenderMap(props) {
         coordinates: [vacancy.longitude, vacancy.latitude],
       },
     }));
+  };
   const [points, setPoints] = useState(getPoints(vacancies));
 
   useEffect(() => {
     // set points
-    const points = getPoints(vacancies);
+    const points = getPoints(vacancies) ?? [];
     setPoints(points);
     supercluster.load(points);
     setClusters(calculateClusters(points));
@@ -135,7 +127,7 @@ export default function RenderMap(props) {
         }}
       >
         <NavigationControl showCompass={false} />
-        <MapClusterList clusters={clusters} icon={iconName} />
+        <MapClusterList clusters={clusters} icon={filterName} />
         {countryBorder && <MapBorder countryBorder={countryBorder} />}
       </ReactMapGL>
     </Context.Provider>

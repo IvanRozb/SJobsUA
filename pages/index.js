@@ -1,56 +1,23 @@
-import Sidebar from "@/components/sidebar/sidebar";
-import MapWrapper from "@/components/map/map-wrapper";
-import { createContext, Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import Head from "next/head";
-import classes from "@/styles/Home.module.css";
-import { getAllVacancies } from "@/helper/api";
+import { useRouter } from "next/router";
+import Loader from "@/components/loader";
 
-export const IndexContext = createContext({
-  iconName: "",
-  setIconName: undefined,
-  isLoading: undefined,
-  setIsLoading: undefined,
-  setVacancies: undefined,
-  currentFilter: "",
-});
-
-export default function Home(props) {
-  const [vacancies, setVacancies] = useState(props.vacancies);
-  const [iconName, setIconName] = useState("default");
-  const [isLoading, setIsLoading] = useState(true);
+export default function Home() {
+  const router = useRouter();
   useEffect(() => {
-    setIsLoading(false);
+    const timer = setTimeout(() => {
+      router.push("all/default");
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <IndexContext.Provider
-      value={{
-        iconName,
-        setIconName,
-        isLoading,
-        setIsLoading,
-        setVacancies,
-        currentFilter: iconName,
-      }}
-    >
-      <Fragment>
-        <Head>
-          <title>SJobsUA</title>
-        </Head>
-        <div className={classes.app}>
-          <Sidebar />
-          <MapWrapper vacancies={vacancies} />
-        </div>
-      </Fragment>
-    </IndexContext.Provider>
+    <Fragment>
+      <Head>
+        <title>SJobsUA</title>
+      </Head>
+      <Loader />
+    </Fragment>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      vacancies: await getAllVacancies(),
-    },
-    revalidate: process.env.FETCHING_VACANCIES_DAYS * 24 * 60 * 60, // one time per FETCHING_VACANCIES_DAYS days
-  };
 }

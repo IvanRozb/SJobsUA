@@ -134,3 +134,8 @@ button {
     border: 0 !important;
     outline: 0 !important;
 }
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
