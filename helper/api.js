@@ -6,7 +6,9 @@ export async function getAllVacancies(...keys) {
   const keywords = keys
     .flatMap((key) => key.split(","))
     .filter((key) => key !== "CSharp" && key !== "default")
-    .map((key) => key.replace("CSharp", "C%23"));
+    .map((key) =>
+      key.replace("CSharp", "C%23").replace("default", "programmer")
+    );
   const total = await getTotalVacanciesForKeywords(keywords);
   const totalPages = Math.ceil(total / VACANCIES_ON_PAGE_AMOUNT);
   const promises = [];
