@@ -1,14 +1,10 @@
 import Image from "next/image";
 import classes from "./filter-wrapper.module.css";
-// import { useContext } from "react";
-// import { IndexContext } from "@/pages";
 import Link from "next/link";
 
 export default function FilterWrapper(props) {
   let { name } = props;
   name = name.replace(".", "");
-  // const { setIconName, setVacancies } = useContext(IndexContext);
-  // let { currentFilter } = useContext(IndexContext);
   const path = `/images/filters/${name}.svg`;
 
   return (
