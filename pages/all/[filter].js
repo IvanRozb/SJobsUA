@@ -1,9 +1,22 @@
 import MapWrapper from "@/components/map/map-wrapper";
+import { Fragment } from "react";
+import Head from "next/head";
 
 export default function FilterPage(props) {
   const { vacancies, filter } = props;
 
-  return <MapWrapper vacancies={vacancies} filterName={filter} />;
+  return (
+    <Fragment>
+      <Head>
+        <title>{`SJobs` + (filter !== "default" ? ` - ${filter}` : "")}</title>
+        <meta
+          name={"description"}
+          content={`This is filter of ${filter} vacancies`}
+        />
+      </Head>
+      <MapWrapper vacancies={vacancies} filterName={filter} />
+    </Fragment>
+  );
 }
 
 export async function getStaticProps(context) {

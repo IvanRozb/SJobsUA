@@ -1,9 +1,11 @@
 .filter{
+    text-align: center;
     background-color: transparent;
     cursor: pointer;
 }
 
 .filter_image{
+    margin: 0 auto;
     width: 50px;
     height: 50px;
 }
