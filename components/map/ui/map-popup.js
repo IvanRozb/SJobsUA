@@ -1,6 +1,11 @@
 import { Popup } from "react-map-gl";
 import ClickAwayListener from "react-click-away-listener";
 import MapPopupList from "@/components/collections/map-popup-list";
+import { forwardRef } from "react";
+
+const ForwardedClickAwayListener = forwardRef((props, ref) => (
+  <ClickAwayListener ref={ref} {...props} />
+));
 
 export default function MapPopup(props) {
   const { setShowVacancies, markers } = props;
@@ -14,21 +19,20 @@ export default function MapPopup(props) {
       closeButton={false}
       closeOnClick={false}
     >
-      <ClickAwayListener
+      <ForwardedClickAwayListener
         onClickAway={(event) => {
+          // close the popup if user clicked on the map('CANVAS')
+          // or in the cluster on the map(it has 'point' class in the classList)
           if (
-            !(
-              event.target.tagName === "path" ||
-              event.target.tagName === "svg" ||
-              event.target.classList.contains("mapboxgl-marker")
-            ) ||
-            event.target.tagName === "CANVAS"
+            event.target.tagName === "CANVAS" ||
+            (event.target.tagName === "IMG" &&
+              event.target.parentNode.classList.contains("point"))
           )
             setShowVacancies(false);
         }}
       >
         <MapPopupList vacancies={vacancies} />
-      </ClickAwayListener>
+      </ForwardedClickAwayListener>
     </Popup>
   );
 }
