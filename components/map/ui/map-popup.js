@@ -1,6 +1,6 @@
 import { Popup } from "react-map-gl";
 import ClickAwayListener from "react-click-away-listener";
-import MapPopupList from "@/components/collections/map-popup-list";
+import MapVacanciesList from "@/components/collections/map-vacancies-list";
 import { forwardRef } from "react";
 
 const ForwardedClickAwayListener = forwardRef((props, ref) => (
@@ -31,7 +31,7 @@ export default function MapPopup(props) {
             setShowVacancies(false);
         }}
       >
-        <MapPopupList vacancies={vacancies} />
+        <MapVacanciesList vacancies={vacancies} />
       </ForwardedClickAwayListener>
     </Popup>
   );

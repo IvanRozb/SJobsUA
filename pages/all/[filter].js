@@ -28,7 +28,6 @@ export async function getStaticProps(context) {
     ).then((res) => res.json());
     vacancies = data.vacancies;
   } catch (error) {
-    console.log(error);
     throw new Error(error);
   }
   return {
