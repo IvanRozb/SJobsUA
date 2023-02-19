@@ -1,5 +1,5 @@
 import classes from "./sidebar.module.css";
-import FilterList from "@/components/collections/filter-list";
+import FilterList from "@/components/sidebar/filter/collections/filter-list";
 
 export default function Sidebar() {
   return (
