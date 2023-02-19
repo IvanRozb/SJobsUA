@@ -17,7 +17,9 @@ export default function FilterList(props) {
           <Filter
             key={encodedCurrentFilter}
             name={encodedCurrentFilter}
-            isActive={encodedCurrentFilter === encodedFilter}
+            isActive={
+              encodedCurrentFilter === encodedFilter || encodedFilter === "All"
+            }
           />
         );
       })}
