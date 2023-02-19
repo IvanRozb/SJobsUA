@@ -27,7 +27,7 @@ export async function getAllVacancies(...keys) {
   try {
     data = await Promise.all(promises);
   } catch (error) {
-    throw new Error(`Error occurred by fetching data for ${keys}!`);
+    throw new Error(`Error occurred by fetching data for ${keys.toString()}!`);
   }
 
   const vacancies = [];

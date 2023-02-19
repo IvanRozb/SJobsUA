@@ -6,17 +6,18 @@ export default function FilterList(props) {
   const { filters } = props;
   const router = useRouter();
   const { filter } = router.query;
+  const encodedFilter = encodeURIComponent(filter);
 
   return (
     <div className={classes.filters}>
       {filters.map((currentFilter) => {
-        const encodedFilter = encodeURIComponent(currentFilter);
+        const encodedCurrentFilter = encodeURIComponent(currentFilter);
 
         return (
           <Filter
-            key={encodedFilter}
-            name={encodedFilter}
-            isActive={encodedFilter === filter}
+            key={encodedCurrentFilter}
+            name={encodedCurrentFilter}
+            isActive={encodedCurrentFilter === encodedFilter}
           />
         );
       })}
