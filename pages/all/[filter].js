@@ -27,7 +27,10 @@ export async function getStaticProps(context) {
     const data = await fetch(
       `${
         process.env.DEFAULT_PORT
-      }/api/filters/language-filter/${encodeURIComponent(filter)}`
+      }/api/filters/language-filter/${encodeURIComponent(filter).replace(
+        "All",
+        "Programmer"
+      )}`
     ).then((res) => res.json());
     vacancies = data.vacancies;
   } catch (error) {
