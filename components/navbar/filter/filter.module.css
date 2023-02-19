@@ -2,12 +2,20 @@
     text-align: center;
     background-color: transparent;
     cursor: pointer;
+
+    margin-right: 1rem;
+}
+
+.filter p{
+    font-size: 0.8rem;
+    color: #ffffff;
+    margin-top: 3px;
 }
 
 .filter_image{
     margin: 0 auto;
-    width: 50px;
-    height: 50px;
+    width: 2.4rem;
+    height: auto;
 }
 
 .filter_image img{
