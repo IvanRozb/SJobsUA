@@ -8,13 +8,13 @@ export default function Navbar() {
         filters={[
           "default",
           "JS",
-          "php",
-          "ruby",
-          "python",
-          "java",
-          "pm",
+          "PHP",
+          "Ruby",
+          "Python",
+          "Java",
+          "PM",
           "CSharp",
-          ".NET",
+          ".Net",
         ]}
       />
     </div>
