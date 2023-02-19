@@ -9,7 +9,7 @@ export default function FilterPage(props) {
   return (
     <Fragment>
       <Head>
-        <title>{`SJobs` + (filter !== "default" ? ` - ${filter}` : "")}</title>
+        <title>{`SJobs` + (filter !== "All" ? ` - ${filter}` : "")}</title>
         <meta
           name={"description"}
           content={`This is filter of ${filter} vacancies`}

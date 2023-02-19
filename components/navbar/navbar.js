@@ -6,7 +6,7 @@ export default function Navbar() {
     <div className={classes.navbar}>
       <FilterList
         filters={[
-          "default",
+          "All",
           "JS",
           "PHP",
           "Ruby",

@@ -5,9 +5,7 @@ const LIMIT_FETCHING_REQUEST_IN_ONE_TIME =
   process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME ?? 20;
 
 export async function getAllVacancies(...keys) {
-  const keywords = keys.flatMap((key) => key.split(","));
-  // console.log(keywords)
-  const total = await getTotalVacanciesForKeywords(keywords);
+  const total = await getTotalVacanciesForKeywords(keys);
   const totalPages = Math.ceil(total / VACANCIES_ON_PAGE_AMOUNT);
   const promises = [];
 
@@ -18,7 +16,7 @@ export async function getAllVacancies(...keys) {
   ) {
     promises.push(
       fetch(
-        `https://api.rabota.ua/vacancy/search?page=${i}&count=${VACANCIES_ON_PAGE_AMOUNT}&keyWords=${keywords.join(
+        `https://api.rabota.ua/vacancy/search?page=${i}&count=${VACANCIES_ON_PAGE_AMOUNT}&keyWords=${keys.join(
           ","
         )}`
       ).then((res) => res.json())
@@ -29,7 +27,7 @@ export async function getAllVacancies(...keys) {
   try {
     data = await Promise.all(promises);
   } catch (error) {
-    throw new Error(`Error occurred by fetching data for ${keywords}!`);
+    throw new Error(`Error occurred by fetching data for ${keys}!`);
   }
 
   const vacancies = [];
@@ -52,7 +50,7 @@ export async function getAllVacancies(...keys) {
     }
   }
 
-  return removeDuplicateVacanciesById(removeUnboundariesVacancies(vacancies));
+  return removeDuplicateVacanciesById(removeUnBoundariesVacancies(vacancies));
 }
 
 async function getTotalVacanciesForKeywords(keywords) {
@@ -72,7 +70,7 @@ function removeDuplicateVacanciesById(vacancies) {
   );
 }
 
-function removeUnboundariesVacancies(vacancies) {
+function removeUnBoundariesVacancies(vacancies) {
   return vacancies.filter(
     (vacancy) =>
       !(
