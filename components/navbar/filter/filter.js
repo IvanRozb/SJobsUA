@@ -1,8 +1,8 @@
 import Image from "next/image";
-import classes from "./filter-wrapper.module.css";
+import classes from "./filter.module.css";
 import Link from "next/link";
 
-export default function FilterWrapper(props) {
+export default function Filter(props) {
   let { name } = props;
   name = name.replace(".", "");
   const path = `/images/filters/${name}.svg`;

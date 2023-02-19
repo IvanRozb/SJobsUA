@@ -1,4 +1,4 @@
-import FilterWrapper from "@/components/sidebar/filter/filter-wrapper";
+import Filter from "@/components/navbar/filter/filter";
 import classes from "./filter-list.module.css";
 
 export default function FilterList(props) {
@@ -7,7 +7,7 @@ export default function FilterList(props) {
   return (
     <div className={classes.filters}>
       {filters.map((filter) => (
-        <FilterWrapper key={encodeURIComponent(filter)} name={filter} />
+        <Filter key={encodeURIComponent(filter)} name={filter} />
       ))}
     </div>
   );
