@@ -1,4 +1,4 @@
-import classes from "@/components/collections/map-vacancies-list.module.css";
+import classes from "@/components/map/collections/map-vacancies-list.module.css";
 import Image from "next/image";
 
 export default function MapVacanciesList(props) {

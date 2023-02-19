@@ -2,8 +2,9 @@ import ReactMapGL, { NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { createContext, useCallback, useEffect, useRef, useState } from "react";
 import Supercluster from "supercluster";
-import MapClusterList from "@/components/collections/map-cluster-list";
+import MapClusterList from "@/components/map/collections/map-cluster-list";
 import MapBorder from "@/components/map/borderline/map-border";
+import { boundaries, center } from "@/helper/constants";
 
 export const Context = createContext({
   mapRef: undefined,
@@ -20,11 +21,6 @@ export default function RenderMap(props) {
     radius: 40,
     maxZoom: 20,
   });
-
-  const center = { latitude: 48.3794, longitude: 31.1656 };
-  const longitudeBoundaries = [40.35, 52.38];
-  const latitudeBoundaries = [22.1, 44.14];
-  const boundaries = [latitudeBoundaries, longitudeBoundaries];
 
   const [clusters, setClusters] = useState([]);
   const [cursor, setCursor] = useState("auto");

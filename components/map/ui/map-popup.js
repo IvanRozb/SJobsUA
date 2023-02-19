@@ -1,6 +1,6 @@
 import { Popup } from "react-map-gl";
 import ClickAwayListener from "react-click-away-listener";
-import MapVacanciesList from "@/components/collections/map-vacancies-list";
+import MapVacanciesList from "@/components/map/collections/map-vacancies-list";
 import { forwardRef } from "react";
 
 const ForwardedClickAwayListener = forwardRef((props, ref) => (

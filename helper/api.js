@@ -1,3 +1,5 @@
+import { latitudeBoundaries, longitudeBoundaries } from "@/helper/constants";
+
 const VACANCIES_ON_PAGE_AMOUNT = process.env.VACANCIES_ON_PAGE_AMOUNT ?? 50;
 const LIMIT_FETCHING_REQUEST_IN_ONE_TIME =
   process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME ?? 20;
@@ -54,7 +56,7 @@ export async function getAllVacancies(...keys) {
     }
   }
 
-  return removeDuplicateVacanciesById(vacancies);
+  return removeDuplicateVacanciesById(removeUnboundariesVacancies(vacancies));
 }
 
 async function getTotalVacanciesForKeywords(keywords) {
@@ -71,5 +73,17 @@ async function getTotalVacanciesForKeywords(keywords) {
 function removeDuplicateVacanciesById(vacancies) {
   return Array.from(new Set(vacancies.map((vacancy) => vacancy.id))).map((id) =>
     vacancies.find((vacancy) => vacancy.id === id)
+  );
+}
+
+function removeUnboundariesVacancies(vacancies) {
+  return vacancies.filter(
+    (vacancy) =>
+      !(
+        vacancy.longitude < longitudeBoundaries[0] ||
+        vacancy.longitude > longitudeBoundaries[1] ||
+        vacancy.latitude < latitudeBoundaries[0] ||
+        vacancy.latitude > latitudeBoundaries[1]
+      )
   );
 }
