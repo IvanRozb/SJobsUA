@@ -5,12 +5,8 @@ const LIMIT_FETCHING_REQUEST_IN_ONE_TIME =
   process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME ?? 20;
 
 export async function getAllVacancies(...keys) {
-  const keywords = keys
-    .flatMap((key) => key.split(","))
-    .filter((key) => key !== "CSharp" && key !== "default")
-    .map((key) =>
-      key.replace("CSharp", "C%23").replace("default", "programmer")
-    );
+  const keywords = keys.flatMap((key) => key.split(","));
+  // console.log(keywords)
   const total = await getTotalVacanciesForKeywords(keywords);
   const totalPages = Math.ceil(total / VACANCIES_ON_PAGE_AMOUNT);
   const promises = [];

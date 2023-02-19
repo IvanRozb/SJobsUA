@@ -9,13 +9,17 @@ export default function FilterList(props) {
 
   return (
     <div className={classes.filters}>
-      {filters.map((currentFilter) => (
-        <Filter
-          key={encodeURIComponent(currentFilter)}
-          name={currentFilter}
-          isActive={currentFilter.replace(".", "") === filter}
-        />
-      ))}
+      {filters.map((currentFilter) => {
+        const encodedFilter = encodeURIComponent(currentFilter);
+
+        return (
+          <Filter
+            key={encodedFilter}
+            name={encodedFilter}
+            isActive={encodedFilter === filter}
+          />
+        );
+      })}
     </div>
   );
 }

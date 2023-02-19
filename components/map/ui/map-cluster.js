@@ -19,7 +19,9 @@ export default function MapCluster(props) {
         >
           <div className={"point"}>
             <Image
-              src={`/images/filters/${icon}.svg`}
+              src={`/images/filters/${
+                icon[0] === "." ? icon.replace(".", "", 1) : icon
+              }.svg`}
               alt={icon}
               width={50}
               height={50}

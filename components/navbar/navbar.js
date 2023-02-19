@@ -13,7 +13,7 @@ export default function Navbar() {
           "Python",
           "Java",
           "PM",
-          "CSharp",
+          "C#",
           ".Net",
         ]}
       />
