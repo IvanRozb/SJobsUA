@@ -1,7 +1,7 @@
-import classes from "@/components/collections/map-popup-list.module.css";
+import classes from "@/components/collections/map-vacancies-list.module.css";
 import Image from "next/image";
 
-export default function MapPopupList(props) {
+export default function MapVacanciesList(props) {
   const { vacancies } = props;
   const refactorString = (str, length) =>
     str.length < length ? str : str.substring(0, length) + "...";
@@ -11,7 +11,10 @@ export default function MapPopupList(props) {
       <div className={classes.popup}>
         {vacancies?.map((vacancy) => {
           // set logo
-          const logo = `https://company-logo-frankfurt.rabota.ua/cdn-cgi/image/w=250/${vacancy.logo}`;
+          const logo =
+            vacancy.logo !== "defaultlogo.gif" && vacancy.logo.trim() !== ""
+              ? `https://company-logo-frankfurt.rabota.ua/cdn-cgi/image/w=250/${vacancy.logo}`
+              : "/images/logo_default.svg";
 
           // set name and company name
           const refactoredName = refactorString(vacancy.name, 13);
