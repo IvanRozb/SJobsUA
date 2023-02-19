@@ -4,6 +4,7 @@ import Head from "next/head";
 
 export default function FilterPage(props) {
   const { vacancies, filter } = props;
+  const encodedFilter = encodeURIComponent(filter);
 
   return (
     <Fragment>
@@ -14,7 +15,7 @@ export default function FilterPage(props) {
           content={`This is filter of ${filter} vacancies`}
         />
       </Head>
-      <MapWrapper vacancies={vacancies} filterName={filter} />
+      <MapWrapper vacancies={vacancies} filterName={encodedFilter} />
     </Fragment>
   );
 }
