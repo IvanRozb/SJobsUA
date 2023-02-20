@@ -2,7 +2,7 @@ import classes from "./navbar.module.css";
 import FilterList from "@/components/navbar/filter/collections/filter-list";
 import LocationFilter from "@/components/navbar/location-filter/location-filter";
 
-export default function Navbar() {
+export default function Navbar({ cities }) {
   return (
     <div className={classes.navbar}>
       <FilterList
@@ -18,7 +18,7 @@ export default function Navbar() {
           ".Net",
         ]}
       />
-      <LocationFilter />
+      <LocationFilter cities={cities} />
     </div>
   );
 }
