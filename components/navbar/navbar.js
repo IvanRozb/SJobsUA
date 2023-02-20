@@ -1,5 +1,6 @@
 import classes from "./navbar.module.css";
 import FilterList from "@/components/navbar/filter/collections/filter-list";
+import LocationFilter from "@/components/navbar/location-filter/location-filter";
 
 export default function Navbar() {
   return (
@@ -17,6 +18,7 @@ export default function Navbar() {
           ".Net",
         ]}
       />
+      <LocationFilter />
     </div>
   );
 }
