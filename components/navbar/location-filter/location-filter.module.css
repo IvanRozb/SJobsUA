@@ -1,0 +1,213 @@
+.location_dropdown {
+    position: relative;
+    display: inline-block;
+
+    width: 13rem;
+    height: 3rem;
+
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* The container <div> - needed to position the dropdown content */
+.location_dropbtn {
+    width: 100%;
+    height: 100%;
+
+    background-color: #5C5C5C;
+    border: none;
+    border-radius: 30px;
+
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.location_dropbtn > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+
+    width: 100%;
+}
+
+.location_flicker_wrapper {
+    padding-right: 2rem;
+}
+
+.location_flicker {
+    width: 1.6rem;
+    color: #ffffff;
+
+    transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.location_dropdown_content {
+    display: block;
+    position: absolute;
+
+    width: 34vw;
+
+    background-color: #2C2C2C;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+
+    border-radius: 5px;
+}
+
+.location_dropdown_container {
+    margin: 16px 24px 24px;
+}
+
+.location_dropdown_header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.location_dropdown_close_btn_ripple{
+    width: 100%;
+    height: 100%;
+}
+
+.location_dropdown_close_btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    -moz-user-select: none;
+    -webkit-appearance: none;
+    flex: 0 0 auto;
+    color: #fff;
+    overflow: hidden;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid rgb(117, 117, 117);
+    background-color: rgb(57, 57, 57);
+    cursor: pointer;
+}
+
+.location_dropdown_close_btn_label{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.location_dropdown_close_btn_root{
+    fill: rgba(255, 255, 255, 0.8);
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    -moz-user-select: none;
+}
+
+.location_dropdown_line {
+    margin: 20px 0;
+    border: none;
+    height: 1px;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.location_clear {
+    width: 5.4rem;
+}
+
+.location_dropdown_content_title {
+    font-size: 1.8em;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.location_dropdown:hover .location_dropbtn {
+    background-color: #1F1F1F;
+}
+
+.locations {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-top: 1em;
+}
+
+.location_item {
+    padding: 0.9em 1.6em;
+
+    background-color: rgb(57, 57, 57);
+    cursor: pointer;
+
+    border-radius: 20px;
+}
+
+.location_ripple{
+    margin: 0.4em;
+    border-radius: 20px;
+}
+
+.location_item:hover {
+    background-color: #1F1F1F;
+}
+
+/* Fade in and scale animation */
+.fadeEnter {
+    opacity: 0;
+    transform: scale(0.4);
+}
+
+.fadeEnterActive {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
+
+.fadeExit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.fadeExitActive {
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+
+/* Animation for rotation */
+
+@keyframes rotate180 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes rotate180-reverse {
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.rotate180 {
+    transform-origin: center;
+    animation: rotate180 0.225s linear forwards;
+}
+
+.reverse {
+    animation: rotate180-reverse 0.225s linear forwards;
+}
