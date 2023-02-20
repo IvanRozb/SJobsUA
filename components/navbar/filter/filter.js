@@ -9,7 +9,7 @@ export default function Filter(props) {
   }.svg`;
 
   return (
-    <Link href={`/all/${name}`}>
+    <Link href={`/${name}`}>
       <div className={classes.filter}>
         <div
           className={`${classes.filter_image} ${
