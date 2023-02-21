@@ -18,7 +18,7 @@ export async function getAllVacancies(...keys) {
       fetch(
         `https://api.rabota.ua/vacancy/search?page=${i}&count=${VACANCIES_ON_PAGE_AMOUNT}&keyWords=${keys.join(
           ","
-        )}`
+        )}&cityId=0`
       ).then((res) => res.json())
     );
   }
@@ -31,10 +31,13 @@ export async function getAllVacancies(...keys) {
   }
 
   const vacancies = [];
+
   for (const pageData of data) {
     const pageVacancies = pageData.documents || [];
     for (const vacancyData of pageVacancies) {
       if (!vacancyData) continue;
+      if (vacancyData.cityId >= 34) continue;
+
       const vacancy = {
         id: vacancyData.id,
         latitude: vacancyData.latitude,
@@ -45,11 +48,14 @@ export async function getAllVacancies(...keys) {
         salaryFrom: vacancyData.salaryFrom,
         salaryTo: vacancyData.salaryTo,
         companyName: vacancyData.companyName,
+        city: {
+          id: vacancyData.cityId,
+          name: vacancyData.cityName,
+        },
       };
       vacancies.push(vacancy);
     }
   }
-
   return removeDuplicateVacanciesById(removeUnBoundariesVacancies(vacancies));
 }
 
@@ -62,6 +68,24 @@ async function getTotalVacanciesForKeywords(keywords) {
     .catch((error) => {
       throw new Error(error);
     });
+}
+
+export async function getAllCities(vacancies) {
+  const cities = new Set();
+  const separator = "_";
+
+  for (const vacancy of vacancies) {
+    const { id, name } = vacancy.city;
+    const cityKey = `${id}${separator}${name}`;
+    cities.add(cityKey);
+  }
+
+  return Array.from(cities)
+    .map((cityKey) => {
+      const [id, name] = cityKey.split(separator);
+      return { id: Number(id), name };
+    })
+    .sort((a, b) => (a.id > b.id ? 1 : -1));
 }
 
 function removeDuplicateVacanciesById(vacancies) {

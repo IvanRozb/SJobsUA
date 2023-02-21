@@ -131,12 +131,14 @@ table {
 }
 
 button {
-    padding: 0 !important;
-    border: 0 !important;
     outline: 0 !important;
 }
 
 a{
     text-decoration: none;
     color: inherit;
+}
+
+.row{
+    display: flex;
 }

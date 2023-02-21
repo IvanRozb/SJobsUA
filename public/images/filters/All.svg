@@ -1,9 +1,7 @@
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="50" height="50">
-	<title>icons8-pin-48</title>
-	<defs>
-		<image  width="32" height="48" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAwCAMAAABHcohdAAAAAXNSR0IB2cksfwAAAU1QTFRFAAAAnBMTlBkZlhoalhoalhoalRkZlRkZlhoamR4elhkZlRoalhoalRoalBwckSQklRkZlhoalhoamRkZlhoalRkZlBUVlhcXlhkZlRoamxYWnx8flhkZlhoalRoalRkZlBcXixcXlRkZlhYWlRoafwAAqgAAlxkZlhoalhsblBoalBUVlRkZlxoalhoalRkZlhkZlBsblRkZlRoalxgYlRoalhkZlRkZkRISlhkZlhoalRkZlhkZlhoalRoalRoalhkZlBsblRgYlhoafwAAlRkZmR0dlRoalhoalRkZkRgYlRkZlRoalhkZjRwclRkZmRkZlhoalhoalRkZlRsblxkZlRoalRkZlRgYlRoalRkZlRoalBkZlhkZlhoalxsblhgYlRoalhkZlxsblhoalhkZlhkZlRkZlxwcmRkZlRoamSIilhoamTMzlhoapGY16AAAAG90Uk5TAA1Zmsrq+slYGZf1/5skB4L0iBTBxhgs4uEXCMWG028rC/kiagIDbJlCQwxtVtSYbnHH6yrp+PcO9ufmcHPE1ZVUUkQEliNy+5QV8PJ6CeQKX8zQQUW2tSn8gOhlZNZKSbq+L/0zoaAbHoUPawXD4QCzcgAAAbJJREFUeJx9lFdbwjAUhk9ZCgQBFSsoU4ZSRMGJqKCiooKKW3CLW/j/l1aatE2bcq6S730fkpyGAMjFmcwWq81mHTAPcqAvu8OJ5HK6hjTY7fEiqmzDbjUfGUW68o0pnB/Xc4T8POEBJheNgMQnfGyO0KS0D48RRyjYO5+y/1A4Eo1GwiE5iE2JgkOexRPSmslUjGTTYv9If2IzyrHSxPAKYCJyXN2YDElnwUzWT6qFZBbHc2DBo3m69zkc52EBjxZpgcfxEpDtCLTA4XgZVvBIcwVWcVyAtf5LFCGPR+u0sIHjTbmRWfqYJRyXYYu0JKUWwiTdBqFAWp1W+I4Nh86o+mNl8CqVMOFoV5zuyTOUzfGCwO+X5KDau9xlZFgHvV88PDLiNXwp60ZCHe/52M/mJ6fkVA220JCPnThj8fOE0pgLlnCpbu2Vnl9TH++mquW3PCWASyuYaQ6BGs29do0ATVpoajkIRTVvMV6pO7Vwr+eQVP7U6KHCEOBREZ5YHOCZ8Bc2h9e2xNtvBgK8S8KHEYfP3mNS+DIUIPgvfBtz4FoIWX/6CPCreYp01el2O3TyB+dyRLn3VGMiAAAAAElFTkSuQmCC"/>
-	</defs>
-	<style>
-	</style>
-	<use id="Background" href="#img1" x="8" y="0"/>
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="All">
+<circle id="Ellipse 4" cx="25" cy="25" r="25" fill="#F9BABA"/>
+<path id="Ellipse 12" d="M37 22.5C37 25.8116 35.4949 29.4598 33.1904 32.6059C30.9343 35.6857 27.9566 38.2228 25 39.4598C22.0434 38.2228 19.0657 35.6857 16.8096 32.6059C14.5051 29.4598 13 25.8116 13 22.5C13 15.8726 18.3726 10.5 25 10.5C31.6274 10.5 37 15.8726 37 22.5Z" fill="#F9BABA" stroke="black"/>
+<circle id="Ellipse 13" cx="25" cy="22.5" r="5" fill="#0A0909"/>
+</g>
 </svg>
