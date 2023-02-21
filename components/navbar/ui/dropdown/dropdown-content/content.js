@@ -2,6 +2,7 @@ import classes from "@/components/navbar/ui/dropdown/dropdown-content/content.mo
 import { CSSTransition } from "react-transition-group";
 import Header from "@/components/navbar/ui/dropdown/dropdown-content/header";
 import ClearFilter from "@/components/navbar/ui/dropdown/dropdown-content/clear-filter";
+import ShowOffersButton from "@/components/navbar/ui/dropdown/dropdown-content/show-offers-button";
 
 export default function Content({
   isExpanded,
@@ -22,16 +23,29 @@ export default function Content({
       }}
       unmountOnExit
     >
-      <div className={classes.location_dropdown_content}>
-        <div className={classes.location_dropdown_container}>
+      <div className={classes.dropdown_content}>
+        <div className={classes.dropdown_container}>
           <Header
             setExpanded={setExpanded}
             isExpanded={isExpanded}
             defaultTitle={defaultTitle}
           />
           {children}
-          <hr className={classes.location_dropdown_line} />
-          <ClearFilter filter={filter} />
+          <hr className={classes.dropdown_line} />
+          {defaultTitle === "Salary" ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <ClearFilter filter={filter} />
+              <ShowOffersButton />{" "}
+            </div>
+          ) : (
+            <ClearFilter filter={filter} />
+          )}
         </div>
       </div>
     </CSSTransition>

@@ -1,5 +1,5 @@
 /* DropdownOption Content (Hidden by Default) */
-.location_dropdown_content {
+.dropdown_content {
     display: block;
     position: absolute;
 
@@ -12,11 +12,11 @@
     border-radius: 5px;
 }
 
-.location_dropdown_container {
+.dropdown_container {
     margin: 16px 24px 24px;
 }
 
-.location_dropdown_line {
+.dropdown_line {
     margin: 20px 0;
     border: none;
     height: 1px;
