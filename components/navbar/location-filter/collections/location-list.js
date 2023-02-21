@@ -5,7 +5,7 @@ export default function LocationList({ cities }) {
   return (
     <div className={classes.locations}>
       {cities?.map((city) => (
-        <LocationItem name={city.name} />
+        <LocationItem name={city.name} key={city.id} />
       ))}
     </div>
   );

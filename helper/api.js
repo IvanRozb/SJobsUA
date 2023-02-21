@@ -72,16 +72,17 @@ async function getTotalVacanciesForKeywords(keywords) {
 
 export async function getAllCities(vacancies) {
   const cities = new Set();
+  const separator = "_";
 
   for (const vacancy of vacancies) {
     const { id, name } = vacancy.city;
-    const cityKey = `${id}-${name}`;
+    const cityKey = `${id}${separator}${name}`;
     cities.add(cityKey);
   }
 
   return Array.from(cities)
     .map((cityKey) => {
-      const [id, name] = cityKey.split("-");
+      const [id, name] = cityKey.split(separator);
       return { id: Number(id), name };
     })
     .sort((a, b) => (a.id > b.id ? 1 : -1));

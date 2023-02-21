@@ -4,6 +4,7 @@ import Head from "next/head";
 import Navbar from "@/components/navbar/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
 import { getAllCities } from "@/helper/api";
+import { translateAllCities } from "@/helper/translation";
 
 export default function FilterPage(props) {
   const { vacancies, filter, cities } = props;
@@ -43,7 +44,11 @@ export async function getStaticProps(context) {
       )}`
     ).then((res) => res.json());
     vacancies = data.vacancies;
-    cities = await getAllCities(vacancies);
+    cities = await translateAllCities(
+      await getAllCities(vacancies),
+      "ru",
+      "uk"
+    );
   } catch (error) {
     throw new Error(error);
   }
