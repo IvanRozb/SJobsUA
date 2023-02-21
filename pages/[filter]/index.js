@@ -8,73 +8,74 @@ import { translateAllCities } from "@/helper/translation";
 import { useRouter } from "next/router";
 import { NotFound } from "next/dist/client/components/error";
 
-export default function FilterPage(props) {
-  const { filter, cities } = props;
-  let { vacancies } = props;
+export default function FilterPage({ filter, cities, vacancies }) {
   const encodedFilter = encodeURIComponent(filter);
-
   const router = useRouter();
-  let { cityId, cityName } = router.query;
-  cityId = +cityId;
+  const { cityId, cityName } = router.query;
+  const filteredVacancies = isNaN(cityId)
+    ? vacancies
+    : vacancies?.filter((vacancy) => vacancy.city.id === +cityId);
+
   if (
-    cities?.filter((city) => city.name === cityName && city.id === cityId)
-      .length <= 0
-  )
+    (cityName &&
+      cityId &&
+      !cities?.some((city) => city.name === cityName && city.id === +cityId)) ||
+    (!cityName && cityId) ||
+    (cityName && !cityId)
+  ) {
     return <NotFound />;
-  if (!isNaN(cityId))
-    vacancies = vacancies?.filter((vacancy) => vacancy.city.id === cityId);
+  }
 
   return (
     <Fragment>
       <Head>
-        <title>{`SJobs` + (filter !== "All" ? ` - ${filter}` : "")}</title>
+        <title>{`SJobs${filter !== "All" ? ` - ${filter}` : ""}`}</title>
         <meta
-          name={"description"}
+          name="description"
           content={`This is filter of ${filter} vacancies`}
         />
       </Head>
       <Navbar cities={cities} filter={filter} />
-      <div className={"row"}>
+      <div className="row">
         <Sidebar />
-        <MapWrapper vacancies={vacancies} filterName={encodedFilter} />
+        <MapWrapper vacancies={filteredVacancies} filterName={encodedFilter} />
       </div>
     </Fragment>
   );
 }
 
-export async function getStaticProps(context) {
-  const { filter } = context.params;
-
-  let vacancies;
-  let cities;
+export async function getStaticProps({ params }) {
+  const { filter } = params;
 
   try {
-    const data = await fetch(
+    const res = await fetch(
       `${
         process.env.DEFAULT_PORT
       }/api/filters/language-filter/${encodeURIComponent(filter).replace(
         "All",
         "Programmer"
       )}`
-    ).then((res) => res.json());
-    vacancies = data.vacancies;
-    cities = await translateAllCities(
+    );
+    const { vacancies } = await res.json();
+    const cities = await translateAllCities(
       await getAllCities(vacancies),
       "ru",
       "en"
     );
+    return {
+      props: {
+        vacancies,
+        filter,
+        cities,
+      },
+      revalidate: process.env.FETCHING_VACANCIES_DAYS * 24 * 60 * 60, // one time per FETCHING_VACANCIES_DAYS days
+    };
   } catch (error) {
-    throw new Error(error);
+    console.error(error);
+    return {
+      notFound: true,
+    };
   }
-
-  return {
-    props: {
-      vacancies,
-      filter,
-      cities,
-    },
-    revalidate: process.env.FETCHING_VACANCIES_DAYS * 24 * 60 * 60, // one time per FETCHING_VACANCIES_DAYS days
-  };
 }
 
 export async function getStaticPaths() {
