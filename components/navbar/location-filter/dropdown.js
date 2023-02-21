@@ -1,7 +1,10 @@
 import Ripples from "react-ripples";
 import classes from "@/components/navbar/location-filter/dropdown.module.css";
+import { useRouter } from "next/router";
 
 export default function Dropdown({ setExpanded, isExpanded }) {
+  const { cityName: currentCity } = useRouter().query;
+
   return (
     <Ripples
       className={classes.location_dropbtn}
@@ -10,7 +13,7 @@ export default function Dropdown({ setExpanded, isExpanded }) {
       }}
     >
       <span>
-        <span>Region</span>
+        <span>{currentCity ? currentCity : "Region"}</span>
         <span className={classes.location_flicker_wrapper}>
           <svg
             className={`${classes.location_flicker} ${
