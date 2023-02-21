@@ -7,7 +7,9 @@ export default function Dropdown({ setExpanded, isExpanded }) {
 
   return (
     <Ripples
-      className={classes.location_dropbtn}
+      className={`${classes.location_dropbtn} ${
+        currentCity ? classes.active : ""
+      }`}
       onClick={() => {
         setExpanded(!isExpanded);
       }}
