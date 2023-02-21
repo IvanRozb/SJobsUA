@@ -16,13 +16,7 @@ export default function FilterPage({ filter, cities, vacancies }) {
     ? vacancies
     : vacancies?.filter((vacancy) => vacancy.city.id === +cityId);
 
-  if (
-    (cityName &&
-      cityId &&
-      !cities?.some((city) => city.name === cityName && city.id === +cityId)) ||
-    (!cityName && cityId) ||
-    (cityName && !cityId)
-  ) {
+  if ((!cityName && cityId) || (cityName && !cityId)) {
     return <NotFound />;
   }
 
