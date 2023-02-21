@@ -6,6 +6,7 @@ import Sidebar from "@/components/sidebar/sidebar";
 import { getAllCities } from "@/helper/api";
 import { translateAllCities } from "@/helper/translation";
 import { useRouter } from "next/router";
+import { NotFound } from "next/dist/client/components/error";
 
 export default function FilterPage(props) {
   const { filter, cities } = props;
@@ -13,7 +14,13 @@ export default function FilterPage(props) {
   const encodedFilter = encodeURIComponent(filter);
 
   const router = useRouter();
-  const cityId = Number(router.query.cityId);
+  let { cityId, cityName } = router.query;
+  cityId = +cityId;
+  if (
+    cities?.filter((city) => city.name === cityName && city.id === cityId)
+      .length <= 0
+  )
+    return <NotFound />;
   if (!isNaN(cityId))
     vacancies = vacancies?.filter((vacancy) => vacancy.city.id === cityId);
 
