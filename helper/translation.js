@@ -15,7 +15,6 @@ export const translateText = async (text, source, target) => {
     }
   );
   const data = await response.json();
-  console.log(data);
   return data[0].translations[0].text;
 };
 
