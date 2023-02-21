@@ -54,7 +54,7 @@ export async function getStaticProps(context) {
     cities = await translateAllCities(
       await getAllCities(vacancies),
       "ru",
-      "uk"
+      "en"
     );
   } catch (error) {
     throw new Error(error);
