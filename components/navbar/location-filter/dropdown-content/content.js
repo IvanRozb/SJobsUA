@@ -22,7 +22,7 @@ export default function Content({ isExpanded, setExpanded, cities, filter }) {
           <Header setExpanded={setExpanded} isExpanded={isExpanded} />
           <LocationList cities={cities} filter={filter} />
           <hr className={classes.location_dropdown_line} />
-          <ClearFilter />
+          <ClearFilter filter={filter} />
         </div>
       </div>
     </CSSTransition>
