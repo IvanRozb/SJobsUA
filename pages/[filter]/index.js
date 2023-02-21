@@ -5,10 +5,17 @@ import Navbar from "@/components/navbar/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
 import { getAllCities } from "@/helper/api";
 import { translateAllCities } from "@/helper/translation";
+import { useRouter } from "next/router";
 
 export default function FilterPage(props) {
-  const { vacancies, filter, cities } = props;
+  const { filter, cities } = props;
+  let { vacancies } = props;
   const encodedFilter = encodeURIComponent(filter);
+
+  const router = useRouter();
+  const cityId = Number(router.query.cityId);
+  if (!isNaN(cityId))
+    vacancies = vacancies?.filter((vacancy) => vacancy.city.id === cityId);
 
   return (
     <Fragment>
@@ -19,7 +26,7 @@ export default function FilterPage(props) {
           content={`This is filter of ${filter} vacancies`}
         />
       </Head>
-      <Navbar cities={cities} />
+      <Navbar cities={cities} filter={filter} />
       <div className={"row"}>
         <Sidebar />
         <MapWrapper vacancies={vacancies} filterName={encodedFilter} />
