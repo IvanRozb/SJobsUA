@@ -3,13 +3,13 @@ import classes from "./filter.module.css";
 import Link from "next/link";
 
 export default function Filter(props) {
-  let { name, isActive } = props;
+  let { name, isActive, queryParameters } = props;
   const path = `/images/filters/${
     name[0] === "." ? name.replace(".", "", 1) : name
   }.svg`;
 
   return (
-    <Link href={`/all/${name}`}>
+    <Link href={{ pathname: `/${name}`, query: queryParameters }}>
       <div className={classes.filter}>
         <div
           className={`${classes.filter_image} ${

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export default function FilterList(props) {
   const { filters } = props;
   const router = useRouter();
-  const { filter } = router.query;
+  const { filter, ...queryParameters } = router.query;
   const encodedFilter = encodeURIComponent(filter);
 
   return (
@@ -20,6 +20,7 @@ export default function FilterList(props) {
             isActive={
               encodedCurrentFilter === encodedFilter || encodedFilter === "All"
             }
+            queryParameters={queryParameters}
           />
         );
       })}
