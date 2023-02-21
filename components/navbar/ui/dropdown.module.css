@@ -13,6 +13,8 @@
 
     text-align: left;
     transition: background-color 0.3s ease;
+
+    z-index: 3;
 }
 
 .location_dropbtn > span {

@@ -1,6 +1,6 @@
 import Ripples from "react-ripples";
 import classes from "@/components/navbar/ui/dropdown.module.css";
-import activeBrick from "@/components/navbar/ui/active-brick.module.css";
+import activeBrick from "@/components/navbar/ui/utilites.module.css";
 
 export default function Dropdown({
   setExpanded,
