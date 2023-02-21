@@ -3,7 +3,7 @@ import { useState } from "react";
 import Dropdown from "@/components/navbar/location-filter/dropdown";
 import Content from "@/components/navbar/location-filter/dropdown-content/content";
 
-export default function LocationFilter({ cities }) {
+export default function LocationFilter({ cities, filter }) {
   const [isExpanded, setExpanded] = useState(false);
 
   return (
@@ -13,6 +13,7 @@ export default function LocationFilter({ cities }) {
         setExpanded={setExpanded}
         isExpanded={isExpanded}
         cities={cities}
+        filter={filter}
       />
     </div>
   );

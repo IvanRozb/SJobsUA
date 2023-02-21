@@ -4,7 +4,7 @@ import Header from "@/components/navbar/location-filter/dropdown-content/header"
 import ClearFilter from "@/components/navbar/location-filter/dropdown-content/clear-filter";
 import LocationList from "@/components/navbar/location-filter/collections/location-list";
 
-export default function Content({ isExpanded, setExpanded, cities }) {
+export default function Content({ isExpanded, setExpanded, cities, filter }) {
   return (
     <CSSTransition
       in={isExpanded}
@@ -20,7 +20,7 @@ export default function Content({ isExpanded, setExpanded, cities }) {
       <div className={classes.location_dropdown_content}>
         <div className={classes.location_dropdown_container}>
           <Header setExpanded={setExpanded} isExpanded={isExpanded} />
-          <LocationList cities={cities} />
+          <LocationList cities={cities} filter={filter} />
           <hr className={classes.location_dropdown_line} />
           <ClearFilter />
         </div>
