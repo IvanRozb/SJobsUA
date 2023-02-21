@@ -6,6 +6,7 @@ import SalaryFilter from "@/components/navbar/salary-filter/salary-filter";
 export default function Navbar({ cities, filter }) {
   return (
     <div className={classes.navbar}>
+      <SalaryFilter filter={filter} />
       <FilterList
         filters={[
           "All",
@@ -20,7 +21,6 @@ export default function Navbar({ cities, filter }) {
         ]}
       />
       <LocationFilter cities={cities} filter={filter} />
-      <SalaryFilter filter={filter} />
     </div>
   );
 }

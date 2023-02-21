@@ -12,6 +12,11 @@
     border-radius: 5px;
 }
 
+.dropdown_content-region {
+    top: 6vh;
+    left: -17vw;
+}
+
 .dropdown_container {
     margin: 16px 24px 24px;
 }
