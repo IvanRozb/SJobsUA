@@ -15,3 +15,7 @@
 .location_item:hover {
     background-color: #1F1F1F;
 }
+
+.active{
+    background-color: #1F1F1F;
+}
