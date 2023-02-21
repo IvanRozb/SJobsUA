@@ -23,6 +23,8 @@ export async function translateAllCities(cities, source, target) {
     cities.map(async (city) => {
       city.name = await translateText(city.name, source, target);
       if (target === "uk" && city.name === "Точно") city.name = "Рівне";
+      if (target === "uk" && city.name === "Дніпра") city.name = "Дніпро";
+      if (target === "uk" && city.name === "Сумська") city.name = "Суми";
       return city;
     })
   );
