@@ -1,21 +1,24 @@
 import Ripples from "react-ripples";
-import classes from "@/components/navbar/location-filter/dropdown.module.css";
-import { useRouter } from "next/router";
+import classes from "@/components/navbar/ui/dropdown.module.css";
+import activeBrick from "@/components/navbar/ui/active-brick.module.css";
 
-export default function Dropdown({ setExpanded, isExpanded }) {
-  const { cityName: currentCity } = useRouter().query;
-
+export default function Dropdown({
+  setExpanded,
+  isExpanded,
+  defaultTitle,
+  currentItem,
+}) {
   return (
     <Ripples
       className={`${classes.location_dropbtn} ${
-        currentCity ? classes.active : ""
+        currentItem ? activeBrick.active : ""
       }`}
       onClick={() => {
         setExpanded(!isExpanded);
       }}
     >
       <span>
-        <span>{currentCity ? currentCity : "Region"}</span>
+        <span>{currentItem ? currentItem : defaultTitle}</span>
         <span className={classes.location_flicker_wrapper}>
           <svg
             className={`${classes.location_flicker} ${

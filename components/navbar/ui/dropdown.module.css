@@ -15,12 +15,6 @@
     transition: background-color 0.3s ease;
 }
 
-.active{
-    color: rgb(255, 103, 156);
-    background: rgba(240, 98, 146, 0.05);
-    border: 2px solid rgb(255, 103, 156);
-}
-
 .location_dropbtn > span {
     display: flex;
     justify-content: space-between;
