@@ -23,7 +23,11 @@ export default function Content({
       }}
       unmountOnExit
     >
-      <div className={classes.dropdown_content}>
+      <div
+        className={`${classes.dropdown_content} ${
+          defaultTitle === "Region" && classes["dropdown_content-region"]
+        }`}
+      >
         <div className={classes.dropdown_container}>
           <Header
             setExpanded={setExpanded}
