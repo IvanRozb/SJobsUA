@@ -1,6 +1,6 @@
 import Ripples from "react-ripples";
 import classes from "@/components/navbar/location-filter/collections/location-item.module.css";
-import activeBrick from "@/components/navbar/ui/active-brick.module.css";
+import activeBrick from "@/components/navbar/ui/utilites.module.css";
 import Link from "next/link";
 
 export default function LocationItem({ name, filter, id, isActive }) {
