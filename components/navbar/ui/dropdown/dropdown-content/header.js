@@ -1,10 +1,12 @@
-import classes from "@/components/navbar/location-filter/dropdown-content/header.module.css";
+import classes from "@/components/navbar/ui/dropdown/dropdown-content/header.module.css";
 import Ripples from "react-ripples";
 
-export default function Header({ setExpanded, isExpanded }) {
+export default function Header({ setExpanded, isExpanded, defaultTitle }) {
   return (
     <div className={classes.location_dropdown_header}>
-      <h4 className={classes.location_dropdown_content_title}>Region</h4>
+      <h4 className={classes.location_dropdown_content_title}>
+        {defaultTitle}
+      </h4>
       <button
         className={classes.location_dropdown_close_btn}
         tabIndex="0"

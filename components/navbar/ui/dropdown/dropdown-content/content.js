@@ -1,10 +1,15 @@
-import classes from "@/components/navbar/location-filter/dropdown-content/content.module.css";
+import classes from "@/components/navbar/ui/dropdown/dropdown-content/content.module.css";
 import { CSSTransition } from "react-transition-group";
-import Header from "@/components/navbar/location-filter/dropdown-content/header";
-import ClearFilter from "@/components/navbar/location-filter/dropdown-content/clear-filter";
-import LocationList from "@/components/navbar/location-filter/collections/location-list";
+import Header from "@/components/navbar/ui/dropdown/dropdown-content/header";
+import ClearFilter from "@/components/navbar/ui/dropdown/dropdown-content/clear-filter";
 
-export default function Content({ isExpanded, setExpanded, cities, filter }) {
+export default function Content({
+  isExpanded,
+  setExpanded,
+  filter,
+  defaultTitle,
+  children,
+}) {
   return (
     <CSSTransition
       in={isExpanded}
@@ -19,8 +24,12 @@ export default function Content({ isExpanded, setExpanded, cities, filter }) {
     >
       <div className={classes.location_dropdown_content}>
         <div className={classes.location_dropdown_container}>
-          <Header setExpanded={setExpanded} isExpanded={isExpanded} />
-          <LocationList cities={cities} filter={filter} />
+          <Header
+            setExpanded={setExpanded}
+            isExpanded={isExpanded}
+            defaultTitle={defaultTitle}
+          />
+          {children}
           <hr className={classes.location_dropdown_line} />
           <ClearFilter filter={filter} />
         </div>

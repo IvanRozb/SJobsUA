@@ -31,12 +31,13 @@ export async function getAllVacancies(...keys) {
   }
 
   const vacancies = [];
+  const maxCityIndex = 34;
 
   for (const pageData of data) {
     const pageVacancies = pageData.documents || [];
     for (const vacancyData of pageVacancies) {
       if (!vacancyData) continue;
-      if (vacancyData.cityId >= 34) continue;
+      if (vacancyData.cityId >= maxCityIndex) continue;
 
       const vacancy = {
         id: vacancyData.id,

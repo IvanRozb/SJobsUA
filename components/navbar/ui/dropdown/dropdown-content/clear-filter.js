@@ -1,4 +1,4 @@
-import classesClear from "@/components/navbar/location-filter/dropdown-content/clear-filter.module.css";
+import classesClear from "@/components/navbar/ui/dropdown/dropdown-content/clear-filter.module.css";
 import classesItem from "@/components/navbar/location-filter/collections/location-item.module.css";
 import Ripples from "react-ripples";
 import Link from "next/link";
