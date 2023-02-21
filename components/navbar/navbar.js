@@ -1,6 +1,7 @@
 import classes from "./navbar.module.css";
 import FilterList from "@/components/navbar/filter/collections/filter-list";
 import LocationFilter from "@/components/navbar/location-filter/location-filter";
+import SalaryFilter from "@/components/navbar/salary-filter/salary-filter";
 
 export default function Navbar({ cities, filter }) {
   return (
@@ -19,6 +20,7 @@ export default function Navbar({ cities, filter }) {
         ]}
       />
       <LocationFilter cities={cities} filter={filter} />
+      <SalaryFilter filter={filter} />
     </div>
   );
 }
