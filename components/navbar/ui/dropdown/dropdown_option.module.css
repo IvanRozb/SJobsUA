@@ -1,0 +1,74 @@
+/* The container <div> - needed to position the dropdown content */
+.dropbtn {
+    width: 100%;
+    height: 100%;
+
+    background-color: #5C5C5C;
+    border: none;
+    border-radius: 30px;
+
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+
+    text-align: left;
+    transition: background-color 0.3s ease;
+
+    z-index: 3;
+}
+
+.dropbtn > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0.83vw;
+
+    font-size: 1vw;
+
+    width: 100%;
+}
+
+.flicker_wrapper {
+    padding-right: 1vw;
+}
+
+.flicker {
+    width: 1.3vw;
+    color: white;
+
+    transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropbtn:hover {
+    background-color: #1F1F1F;
+}
+
+/* Animation for rotation */
+
+@keyframes rotate180 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes rotate180-reverse {
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.rotate180 {
+    transform-origin: center;
+    animation: rotate180 0.225s linear forwards;
+}
+
+.reverse {
+    animation: rotate180-reverse 0.225s linear forwards;
+}

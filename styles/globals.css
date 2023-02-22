@@ -105,6 +105,7 @@ section {
 
 body {
     line-height: 1;
+    font-family: Open Sans,sans-serif;
 }
 
 ol,
@@ -130,12 +131,14 @@ table {
 }
 
 button {
-    padding: 0 !important;
-    border: 0 !important;
     outline: 0 !important;
 }
 
 a{
     text-decoration: none;
     color: inherit;
+}
+
+.row{
+    display: flex;
 }

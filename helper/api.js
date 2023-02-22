@@ -5,13 +5,7 @@ const LIMIT_FETCHING_REQUEST_IN_ONE_TIME =
   process.env.LIMIT_FETCHING_REQUEST_IN_ONE_TIME ?? 20;
 
 export async function getAllVacancies(...keys) {
-  const keywords = keys
-    .flatMap((key) => key.split(","))
-    .filter((key) => key !== "CSharp" && key !== "default")
-    .map((key) =>
-      key.replace("CSharp", "C%23").replace("default", "programmer")
-    );
-  const total = await getTotalVacanciesForKeywords(keywords);
+  const total = await getTotalVacanciesForKeywords(keys);
   const totalPages = Math.ceil(total / VACANCIES_ON_PAGE_AMOUNT);
   const promises = [];
 
@@ -22,9 +16,9 @@ export async function getAllVacancies(...keys) {
   ) {
     promises.push(
       fetch(
-        `https://api.rabota.ua/vacancy/search?page=${i}&count=${VACANCIES_ON_PAGE_AMOUNT}&keyWords=${keywords.join(
+        `https://api.rabota.ua/vacancy/search?page=${i}&count=${VACANCIES_ON_PAGE_AMOUNT}&keyWords=${keys.join(
           ","
-        )}`
+        )}&cityId=0`
       ).then((res) => res.json())
     );
   }
@@ -33,14 +27,18 @@ export async function getAllVacancies(...keys) {
   try {
     data = await Promise.all(promises);
   } catch (error) {
-    throw new Error(`Error occurred by fetching data for ${keywords}!`);
+    throw new Error(`Error occurred by fetching data for ${keys.toString()}!`);
   }
 
   const vacancies = [];
+  const maxCityIndex = 34;
+
   for (const pageData of data) {
     const pageVacancies = pageData.documents || [];
     for (const vacancyData of pageVacancies) {
       if (!vacancyData) continue;
+      if (vacancyData.cityId >= maxCityIndex) continue;
+
       const vacancy = {
         id: vacancyData.id,
         latitude: vacancyData.latitude,
@@ -51,12 +49,15 @@ export async function getAllVacancies(...keys) {
         salaryFrom: vacancyData.salaryFrom,
         salaryTo: vacancyData.salaryTo,
         companyName: vacancyData.companyName,
+        city: {
+          id: vacancyData.cityId,
+          name: vacancyData.cityName,
+        },
       };
       vacancies.push(vacancy);
     }
   }
-
-  return removeDuplicateVacanciesById(removeUnboundariesVacancies(vacancies));
+  return removeDuplicateVacanciesById(removeUnBoundariesVacancies(vacancies));
 }
 
 async function getTotalVacanciesForKeywords(keywords) {
@@ -70,13 +71,31 @@ async function getTotalVacanciesForKeywords(keywords) {
     });
 }
 
+export async function getAllCities(vacancies) {
+  const cities = new Set();
+  const separator = "_";
+
+  for (const vacancy of vacancies) {
+    const { id, name } = vacancy.city;
+    const cityKey = `${id}${separator}${name}`;
+    cities.add(cityKey);
+  }
+
+  return Array.from(cities)
+    .map((cityKey) => {
+      const [id, name] = cityKey.split(separator);
+      return { id: Number(id), name };
+    })
+    .sort((a, b) => (a.id > b.id ? 1 : -1));
+}
+
 function removeDuplicateVacanciesById(vacancies) {
   return Array.from(new Set(vacancies.map((vacancy) => vacancy.id))).map((id) =>
     vacancies.find((vacancy) => vacancy.id === id)
   );
 }
 
-function removeUnboundariesVacancies(vacancies) {
+function removeUnBoundariesVacancies(vacancies) {
   return vacancies.filter(
     (vacancy) =>
       !(
