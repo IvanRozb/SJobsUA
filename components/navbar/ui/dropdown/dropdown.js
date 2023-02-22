@@ -10,6 +10,7 @@ export default function Dropdown({
   defaultTitle,
   filter,
   children,
+  parameters,
 }) {
   return (
     <div>
@@ -26,6 +27,7 @@ export default function Dropdown({
           isExpanded={isExpanded}
           filter={filter}
           defaultTitle={defaultTitle}
+          parameters={parameters}
         >
           {children}
         </Content>

@@ -10,6 +10,7 @@ export default function Content({
   filter,
   defaultTitle,
   children,
+  parameters,
 }) {
   return (
     <CSSTransition
@@ -44,11 +45,11 @@ export default function Content({
                 alignItems: "center",
               }}
             >
-              <ClearFilter filter={filter} />
-              <ShowOffersButton />{" "}
+              <ClearFilter filter={filter} parameters={parameters} />
+              <ShowOffersButton filter={filter} />
             </div>
           ) : (
-            <ClearFilter filter={filter} />
+            <ClearFilter filter={filter} parameters={parameters} />
           )}
         </div>
       </div>
