@@ -1,5 +1,5 @@
 import Overlay from "@/components/navbar/ui/overlay";
-import classes from "@/components/navbar/location-filter/location-filter.module.css";
+import classes from "@/components/navbar/ui/dropdown/dropdown.module.css";
 import DropdownOption from "@/components/navbar/ui/dropdown/dropdown-option";
 import Content from "@/components/navbar/ui/dropdown/dropdown-content/content";
 
@@ -10,11 +10,12 @@ export default function Dropdown({
   defaultTitle,
   filter,
   children,
+  parameters,
 }) {
   return (
     <div>
       {isExpanded && <Overlay setExpanded={setExpanded} />}
-      <div className={classes.location_dropdown}>
+      <div className={classes.dropdown}>
         <DropdownOption
           setExpanded={setExpanded}
           isExpanded={isExpanded}
@@ -26,6 +27,7 @@ export default function Dropdown({
           isExpanded={isExpanded}
           filter={filter}
           defaultTitle={defaultTitle}
+          parameters={parameters}
         >
           {children}
         </Content>

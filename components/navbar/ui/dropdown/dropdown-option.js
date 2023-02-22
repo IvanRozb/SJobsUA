@@ -10,18 +10,16 @@ export default function DropdownOption({
 }) {
   return (
     <Ripples
-      className={`${classes.location_dropbtn} ${
-        currentItem ? activeBrick.active : ""
-      }`}
+      className={`${classes.dropbtn} ${currentItem ? activeBrick.active : ""}`}
       onClick={() => {
         setExpanded(!isExpanded);
       }}
     >
       <span>
         <span>{currentItem ? currentItem : defaultTitle}</span>
-        <span className={classes.location_flicker_wrapper}>
+        <span className={classes.flicker_wrapper}>
           <svg
-            className={`${classes.location_flicker} ${
+            className={`${classes.flicker} ${
               isExpanded ? classes.rotate180 : classes.reverse
             }`}
             focusable="false"

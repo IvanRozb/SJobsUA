@@ -6,24 +6,24 @@ import Sidebar from "@/components/sidebar/sidebar";
 import { getAllCities } from "@/helper/api";
 import { translateAllCities } from "@/helper/translation";
 import { useRouter } from "next/router";
-import { NotFound } from "next/dist/client/components/error";
+import {
+  filterVacanciesByCity,
+  filterVacanciesBySalary,
+} from "@/helper/filters";
 
 export default function FilterPage({ filter, cities, vacancies }) {
   const encodedFilter = encodeURIComponent(filter);
-  const router = useRouter();
-  const { cityId, cityName } = router.query;
-  const filteredVacancies = isNaN(cityId)
-    ? vacancies
-    : vacancies?.filter((vacancy) => vacancy.city.id === +cityId);
 
-  if ((!cityName && cityId) || (cityName && !cityId)) {
-    return <NotFound />;
-  }
+  const router = useRouter();
+  const filteredVacancies = filterVacanciesBySalary(
+    router,
+    filterVacanciesByCity(router, vacancies)
+  );
 
   return (
     <Fragment>
       <Head>
-        <title>{`SJobs${filter !== "All" ? ` - ${filter}` : ""}`}</title>
+        <title>{`SJobsUA${filter !== "All" ? ` - ${filter}` : ""}`}</title>
         <meta
           name="description"
           content={`This is filter of ${filter} vacancies`}
