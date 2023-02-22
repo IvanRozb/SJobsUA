@@ -14,6 +14,7 @@ export default function LocationFilter({ cities, filter }) {
       isExpanded={isExpanded}
       currentItem={currentCity}
       defaultTitle={"Region"}
+      parameters={["cityName", "cityId"]}
     >
       <LocationList cities={cities} filter={filter} />
     </Dropdown>
