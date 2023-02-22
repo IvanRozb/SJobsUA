@@ -8,23 +8,33 @@ import SalaryAmountRange from "@/components/navbar/salary-filter/salary-amount-r
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { NavbarContext } from "@/components/navbar/navbar";
+import { splitSalary } from "@/helper/filters";
 
 export default function SalaryFilter({ filter }) {
   const [isExpanded, setExpanded] = useState(false);
   const { salary } = useRouter().query;
-
-  const minValue = 0,
-    maxValue = 100000;
-  const [value, setValue] = useState([minValue, maxValue]);
   const { setSalary } = useContext(NavbarContext);
 
+  const [value, setValue] = useState([0, 100000]);
+
   useEffect(() => {
-    setSalary(value);
-  }, [value, setSalary]);
+    const [minSalary, maxSalary] = splitSalary(salary) ?? [
+      undefined,
+      undefined,
+    ];
+    setValue([
+      minSalary !== undefined ? minSalary : 0,
+      maxSalary !== undefined ? maxSalary : 100000,
+    ]);
+  }, [salary]);
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    setSalary(value);
+  }, [setSalary, value]);
 
   return (
     <Dropdown
@@ -41,8 +51,8 @@ export default function SalaryFilter({ filter }) {
         className={sliderClasses.slider}
         value={value}
         onChange={handleChange}
-        min={minValue}
-        max={maxValue}
+        min={0}
+        max={100000}
         step={1000}
         range
       />
