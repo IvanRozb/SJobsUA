@@ -22,13 +22,13 @@ export default function MapVacanciesList(props) {
 
           // set salary
           const salary = vacancy.salary
-            ? `$${vacancy.salary}`
+            ? `₴${vacancy.salary}`
             : vacancy.salaryFrom && vacancy.salaryTo
-            ? `$${vacancy.salaryFrom} - $${vacancy.salaryTo}`
+            ? `₴${vacancy.salaryFrom} - ₴${vacancy.salaryTo}`
             : vacancy.salaryFrom
-            ? `min: $${vacancy.salaryFrom}`
+            ? `min: ₴${vacancy.salaryFrom}`
             : vacancy.salaryTo
-            ? `max: $${vacancy.salaryTo}`
+            ? `max: ₴${vacancy.salaryTo}`
             : "";
 
           return (
