@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: "company-logo-frankfurt.rabota.ua",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
+        port: "",
+      },
     ],
   },
   env: {

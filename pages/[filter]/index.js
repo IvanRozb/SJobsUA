@@ -31,7 +31,7 @@ export default function FilterPage({ filter, cities, vacancies }) {
       </Head>
       <Navbar cities={cities} filter={filter} />
       <div className="row">
-        <Sidebar />
+        <Sidebar vacancies={vacancies}/>
         <MapWrapper vacancies={filteredVacancies} filterName={encodedFilter} />
       </div>
     </Fragment>
