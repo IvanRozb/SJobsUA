@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push("All");
+      router.push("all");
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
