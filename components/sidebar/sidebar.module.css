@@ -37,6 +37,7 @@
 .vacancy_image img {
     border-radius: 5px;
     object-fit: scale-down;
+    object-position: center;
 }
 
 .vacancy_inner {
