@@ -1,7 +1,7 @@
 .sidebar {
     width: 50vw;
     height: 90vh;
-    overflow: auto;
+    overflow: hidden auto;
     background: rgb(32, 32, 32);
     color: #ffffff;
 }
@@ -18,7 +18,7 @@
     background-color: rgb(44, 44, 44);
 }
 
-.vacancy:first-child{
+.vacancy:first-child {
     margin-top: 1vh;
 }
 
@@ -28,15 +28,18 @@
     align-items: center;
 }
 
-.vacancy_image{
+.vacancy_image {
     margin-left: 0.4vw;
+    width: 120px;
+    height: 65px;
 }
 
-.vacancy_image img{
+.vacancy_image img {
     border-radius: 5px;
+    object-fit: scale-down;
 }
 
-.vacancy_inner{
+.vacancy_inner {
     margin-left: 0.6vw;
 }
 
@@ -50,14 +53,14 @@
     align-items: center;
 }
 
-.vacancy_title{
+.vacancy_title {
     margin-bottom: 1vh;
 }
 
-.vacancy_company_title{
+.vacancy_company_title {
     margin-right: 0.5vw;
 }
 
-.vacancy_salary{
+.vacancy_salary {
     margin-right: 0.5vw;
 }

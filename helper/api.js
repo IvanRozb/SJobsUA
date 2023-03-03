@@ -53,6 +53,7 @@ export async function getAllVacancies(...keys) {
           id: vacancyData.cityId,
           name: vacancyData.cityName,
         },
+        date: vacancyData.date
       };
       vacancies.push(vacancy);
     }
