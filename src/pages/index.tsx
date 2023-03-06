@@ -1,7 +1,7 @@
-import classes from '../styles/Home.module.scss'
+import React from "react";
 
-export default function Home() {
-	return (
-		<></>
-	);
-}
+const Home: React.FC = () => {
+	return <></>;
+};
+
+export default Home;
