@@ -1,0 +1,46 @@
+.popup_wrapper{
+    overflow: hidden;
+    border-radius: 20px;
+}
+.popup{
+    max-height: calc(5rem * 3.5);
+    overflow: auto;
+}
+.popup_item {
+    background-color: #ffffff;
+    display: flex;
+    text-align: center;
+    width: 100%;
+    height: 5rem;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+}
+
+.image img {
+    width: 90% !important;
+    object-fit: cover;
+}
+
+.content {
+    width: 65%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content h3 {
+    margin: 0 0;
+    font-size: 13px;
+}
+
+.content p {
+    line-height: 1;
+    color: darkgreen;
+}

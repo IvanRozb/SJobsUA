@@ -1,0 +1,67 @@
+.sidebar {
+    width: 50vw;
+    height: 90vh;
+    overflow: hidden auto;
+    background: rgb(32, 32, 32);
+    color: #ffffff;
+}
+
+.vacancy {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 1vh;
+
+    width: 97%;
+    height: 8vh;
+    border-radius: 10px;
+
+    background-color: rgb(44, 44, 44);
+}
+
+.vacancy:first-child {
+    margin-top: 1vh;
+}
+
+.vacancy_introduction {
+    display: flex;
+    margin-left: 0.4vw;
+    align-items: center;
+}
+
+.vacancy_image {
+    margin-left: 0.4vw;
+    width: 120px;
+    height: 65px;
+}
+
+.vacancy_image img {
+    border-radius: 5px;
+    object-fit: scale-down;
+    object-position: center;
+}
+
+.vacancy_inner {
+    margin-left: 0.6vw;
+}
+
+.vacancy_location {
+    display: flex;
+}
+
+.vacancy_info {
+    display: flex;
+    margin-right: 0.4vw;
+    align-items: center;
+}
+
+.vacancy_title {
+    margin-bottom: 1vh;
+}
+
+.vacancy_company_title {
+    margin-right: 0.5vw;
+}
+
+.vacancy_salary {
+    margin-right: 0.5vw;
+}
