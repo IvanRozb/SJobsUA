@@ -1,4 +1,4 @@
-import { DEPLOY , BUTTONFragment, useEffect } from "react";
+import { DEPLOY , useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Loader from "@/components/loader";
