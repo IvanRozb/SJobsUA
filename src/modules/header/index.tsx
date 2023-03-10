@@ -1,17 +1,24 @@
-import { AppBar, Tab, Tabs, Toolbar, Typography } from "@mui/material";
+import {
+	AppBar,
+	Toolbar,
+	Typography
+} from "@mui/material";
 import React from "react";
-import classes from '@/modules/header/header.module.scss'
+import classes from "./header.module.scss";
+import Navigation from "@/components/navigation";
+import Link from "next/link";
+import { theme } from "@/helpers/theme";
 
 const Header: React.FC = () => {
 	return <AppBar>
 		<Toolbar>
-			<Typography variant="h1">SJobsUA</Typography>
+			<Link href="/"><Typography sx={{
+				"&:hover": {
+					color: theme.palette.secondary.main
+				}
+			}} variant="h1">SJobsUA</Typography></Link>
 			<Typography variant="h2" className={classes.subtitle}>Job Board for tech industry in Ukraine</Typography>
-			<Tabs className={classes.tabs}>
-				<Tab label="Offers" disableTouchRipple/>
-				<Tab className={classes.post_tab} label="Post a Job"/>
-				<Tab className={classes.sign_tab} label="Sign in"/>
-			</Tabs>
+			<Navigation />
 		</Toolbar>
 	</AppBar>;
 };

@@ -6,10 +6,12 @@ export const theme = createTheme({
 			white: "rgba(255,255,255,0.8)"
 		},
 		primary: {
-			main: "#2c2c2c"
+			main: "#2c2c2c",
+			light: "#393939"
 		},
 		secondary: {
-			main: "#202020"
+			main: "#f06292",
+			dark: "#ad1457"
 		},
 		text: {
 			secondary: "rgba(255,255,255,0.8)"
@@ -28,5 +30,8 @@ export const theme = createTheme({
 			textTransform: "none",
 			fontWeight: 700
 		}
+	},
+	shape: {
+		borderRadius: 30
 	}
 });
